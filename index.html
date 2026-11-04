@@ -98,7 +98,6 @@ a { color: inherit; }
 .cover-info .names { margin: 0; font-size: 20px; font-weight: 400; letter-spacing: 0.06em; }
 .cover-info .when { margin: 4px 0 0; font-size: 16px; letter-spacing: 0.04em; }
 
-.flower-row { display: flex; justify-content: center; padding-block: 28px 0; }
 .pill {
   display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 22px;
   border: 0; border-radius: 999px; background: var(--paper); color: var(--ink);
@@ -119,10 +118,16 @@ section { padding-block: 88px; text-align: center; }
 .body-text { margin: 0; white-space: pre-line; }
 
 /* Invitation */
-.parents { margin: 44px auto 0; display: grid; gap: 6px; justify-content: center; font-size: 15px; color: var(--ink); }
-.parents p { margin: 0; display: grid; grid-template-columns: auto auto auto; gap: 0 8px; align-items: baseline; justify-content: center; }
+.parents {
+  margin: 44px auto 0; display: grid; grid-template-columns: auto auto auto; justify-content: center;
+  align-items: baseline; gap: 10px 8px; font-size: 15px; color: var(--ink);
+}
+.parents p { display: contents; }
+.parents span { white-space: nowrap; }
+.parents span:first-child { text-align: right; }
 .parents .rel { color: var(--muted); font-size: 13px; }
 .parents b { font-weight: 700; }
+@media (max-width: 340px) { .parents { font-size: 14px; gap: 8px 6px; } .parents .rel { font-size: 12px; } }
 .contact-row { margin-top: 36px; display: flex; justify-content: center; }
 
 /* Calendar */
@@ -345,12 +350,6 @@ textarea.field { min-height: 120px; resize: vertical; line-height: 1.6; }
     <span class="scroll-hint" aria-hidden="true"></span>
   </header>
 
-  <div class="flower-row">
-    <a class="pill" id="flower" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 13c-2.5 0-4.5-2-4.5-4.5S9.5 4 12 4s4.5 2 4.5 4.5S14.5 13 12 13Z"/><path d="M12 13v8M12 17c-2 0-4-1-5-3M12 19c2 0 4-1 5-3"/></svg>
-      축하 화환 보내기
-    </a>
-  </div>
 
   <section class="wrap" aria-labelledby="t-invite">
     <h2 class="title" id="t-invite"><span class="en">Invitation</span><span class="kr">소중한 분들을 초대합니다</span></h2>
@@ -532,15 +531,14 @@ textarea.field { min-height: 120px; resize: vertical; line-height: 1.6; }
 var CONFIG = {
   // Google Apps Script 웹 앱 URL (참석 회신·방명록 저장). 비워 두면 예시 모드.
   ENDPOINT: 'https://script.google.com/macros/s/AKfycbyUna-YtzFDk7DtZOmTm7d2AmH4hFId43NsYd8Ws3txq4TaMkSqIRw-gUtPy3ZvN6mgTA/exec',
-  // 축하 화환 업체 링크
-  FLOWER_URL: '',
   // 카카오 개발자 JavaScript 키 (카카오톡 공유용)
   KAKAO_KEY: '',
   // 지도 앱에서 검색할 이름
   VENUE: { name: '엘타워 양재', query: '서울 서초구 강남대로 213' },
   // 월은 실제보다 1 작게 (3월 → 2)
   WEDDING: new Date(2027, 2, 6, 12, 0),
-  PHOTOS: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'].map(function (n) { return 'photos/' + n + '.jpg'; }),
+  // 갤러리 사진: photos/01.jpg … (작은 미리보기는 photos/thumbs/ 에 같은 이름으로)
+  PHOTOS: ['01', '02', '03', '04', '05', '06', '07', '08', '09'].map(function (n) { return 'photos/' + n + '.jpg'; }),
   // tel 을 채우면 '연락하기' 버튼이 나타납니다
   CONTACTS: [
     { side: '신랑측', people: [
@@ -588,12 +586,6 @@ var CONFIG = {
   document.querySelectorAll('dialog').forEach(function (d) {
     d.querySelectorAll('[data-close]').forEach(function (b) { b.addEventListener('click', function () { close(d); }); });
     d.addEventListener('click', function (e) { if (e.target === d && d.classList.contains('modal')) close(d); });
-  });
-
-  // Flower
-  $('flower').addEventListener('click', function (e) {
-    if (CONFIG.FLOWER_URL) { this.href = CONFIG.FLOWER_URL; this.target = '_blank'; this.rel = 'noopener'; return; }
-    e.preventDefault(); showToast('화환 업체 링크가 아직 설정되지 않았습니다');
   });
 
   // Sections that wait for real data stay hidden until it is filled in
@@ -660,7 +652,7 @@ var CONFIG = {
   CONFIG.PHOTOS.forEach(function (src, i) {
     var b = el('button', 'g-item'); b.type = 'button'; b.setAttribute('aria-label', '사진 ' + (i + 1) + ' 크게 보기');
     b.appendChild(el('span', 'n', two(i + 1)));
-    var img = el('img'); img.alt = ''; img.loading = 'lazy'; img.decoding = 'async'; img.src = src;
+    var img = el('img'); img.alt = ''; img.loading = 'lazy'; img.decoding = 'async'; img.src = src.replace('photos/', 'photos/thumbs/');
     img.onload = function () { loaded[i] = true; }; img.onerror = function () { img.remove(); };
     b.appendChild(img); b.addEventListener('click', function () { openViewer(CONFIG.PHOTOS, i, loaded); });
     gallery.appendChild(b);
@@ -799,7 +791,7 @@ var CONFIG = {
   // Scroll reveal: content is visible by default; hiding only starts once the observer is ready
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if ('IntersectionObserver' in window && !reduce) {
-    var targets = document.querySelectorAll('section .title, section .body-text, .parents, .contact-row, .cal-card, .join-grid, .join .ph, .gallery, .venue-name, .map, .navs, .ways, .gb-track, .gb-actions, .rsvp-card, #accounts, .ending .ph, .ending-title, .quote, .flower-row');
+    var targets = document.querySelectorAll('section .title, section .body-text, .parents, .contact-row, .cal-card, .join-grid, .join .ph, .gallery, .venue-name, .map, .navs, .ways, .gb-track, .gb-actions, .rsvp-card, #accounts, .ending .ph, .ending-title, .quote');
     var io = new IntersectionObserver(function (list) {
       list.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
