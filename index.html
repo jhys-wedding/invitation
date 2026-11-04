@@ -153,7 +153,7 @@ section { padding-block: 88px; text-align: center; }
 .join-grid .lines span { display: block; }
 .join-grid .big { font-family: var(--en); font-size: 64px; line-height: 0.9; letter-spacing: -0.02em; text-align: right; color: var(--wine); font-weight: 300; }
 .join-grid .meta { grid-column: 1 / -1; display: flex; justify-content: space-between; border-top: 1px solid rgba(131, 16, 23, 0.35); padding-top: 10px; }
-.join .ph { margin-top: 28px; aspect-ratio: 3 / 4; max-width: 100%; }
+.join .ph { margin-top: 28px; aspect-ratio: 2491 / 1862; max-width: 100%; }
 
 /* Gallery */
 .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
@@ -167,12 +167,7 @@ section { padding-block: 88px; text-align: center; }
 .venue-name { margin: 0; font-size: 16px; font-weight: 700; color: var(--ink); }
 .venue-addr { margin: 4px 0 0; }
 .venue-tel { margin: 2px 0 0; font-family: var(--en); font-size: 15px; }
-.map { margin: 28px -28px 0; aspect-ratio: 4 / 3; max-width: calc(100% + 56px); background: #e9e5e6; display: grid; place-items: center; position: relative; }
-.map-inner { display: grid; justify-items: center; gap: 10px; font-family: var(--ui); font-size: 12px; color: var(--muted); }
-.map-pin { width: 34px; height: 34px; color: var(--rose); }
-.map-actions { position: absolute; right: 12px; bottom: 12px; }
-.mini { min-height: 34px; padding: 0 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); font-family: var(--ui); font-size: 12px; color: var(--ink); }
-.navs { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0 -28px; background: var(--paper); border-bottom: 1px solid var(--line); }
+.navs { display: grid; grid-template-columns: repeat(3, 1fr); margin: 28px -28px 0; border-top: 1px solid var(--line); background: var(--paper); border-bottom: 1px solid var(--line); }
 .navs a { display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 52px; font-family: var(--ui); font-size: 13px; color: var(--ink); text-decoration: none; }
 .navs a + a { border-left: 1px solid var(--line); }
 .navs a:hover { background: #faf8f8; }
@@ -389,7 +384,7 @@ textarea.field { min-height: 120px; resize: vertical; line-height: 1.6; }
       <div class="big">06</div>
       <div class="meta"><span>March 2027</span><span>Saturday</span><span>PM 12:00</span></div>
     </div>
-    <div class="ph parallax"><span class="ph-label">중간 사진 자리 · photos/middle.jpg</span><img src="photos/middle.jpg" alt="" onerror="this.remove()"></div>
+    <div class="ph"><span class="ph-label">중간 사진 자리 · photos/middle.jpg</span><img src="photos/middle.jpg" alt="" onerror="this.remove()"></div>
   </section>
 
   <section class="wrap" aria-labelledby="t-gallery">
@@ -402,13 +397,6 @@ textarea.field { min-height: 120px; resize: vertical; line-height: 1.6; }
     <p class="venue-name">엘타워 양재</p>
     <p class="venue-addr">서울 서초구 강남대로 213 엘타워</p>
     <p class="venue-tel">Tel. 02-526-8600</p>
-    <div class="map">
-      <div class="map-inner">
-        <svg class="map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>
-        <span>지도 자리 (네이버 지도 키 설정 시 표시)</span>
-      </div>
-      <div class="map-actions"><button class="mini" type="button" id="sketch-btn">약도 이미지 보기</button></div>
-    </div>
     <div class="navs">
       <a id="nav-naver" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12Z"/></svg>네이버지도</a>
       <a id="nav-tmap" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 18-8-8 18-2-8-8-2Z"/></svg>티맵</a>
@@ -676,10 +664,6 @@ var CONFIG = {
   stage.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; }, { passive: true });
   stage.addEventListener('touchend', function (e) { if (tx === null) return; var dx = e.changedTouches[0].clientX - tx; tx = null; if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1); });
 
-  // Sketch map
-  var sketchOk = [false]; var sk = new Image(); sk.onload = function () { sketchOk[0] = true; }; sk.src = 'photos/map.jpg';
-  $('sketch-btn').addEventListener('click', function () { openViewer(['photos/map.jpg'], 0, sketchOk); });
-
   // Navigation links
   var V = CONFIG.VENUE, q = encodeURIComponent(V.name), qa = encodeURIComponent(V.query);
   $('nav-naver').href = 'https://map.naver.com/p/search/' + q;
@@ -791,7 +775,7 @@ var CONFIG = {
   // Scroll reveal: content is visible by default; hiding only starts once the observer is ready
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if ('IntersectionObserver' in window && !reduce) {
-    var targets = document.querySelectorAll('section .title, section .body-text, .parents, .contact-row, .cal-card, .join-grid, .join .ph, .gallery, .venue-name, .map, .navs, .ways, .gb-track, .gb-actions, .rsvp-card, #accounts, .ending .ph, .ending-title, .quote');
+    var targets = document.querySelectorAll('section .title, section .body-text, .parents, .contact-row, .cal-card, .join-grid, .join .ph, .gallery, .venue-name, .navs, .ways, .gb-track, .gb-actions, .rsvp-card, #accounts, .ending .ph, .ending-title, .quote');
     var io = new IntersectionObserver(function (list) {
       list.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
