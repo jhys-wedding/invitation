@@ -213,7 +213,7 @@ section:has(+ .tint) { padding-bottom: 72px; }
 .navs a { display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 52px; font-family: var(--ui); font-size: 13px; color: var(--ink); text-decoration: none; }
 .navs a + a { border-left: 1px solid var(--line); }
 .navs a:hover { background: #f5f5f5; }
-.navs svg { width: 16px; height: 16px; color: var(--rose); }
+.navs svg { width: 16px; height: 16px; color: var(--ink); fill: currentColor; }
 .ways { margin-top: 36px; text-align: left; display: grid; }
 .way { padding-block: 22px; border-top: 1px solid var(--line); }
 .way:last-child { padding-bottom: 22px; }
@@ -445,13 +445,13 @@ textarea.field { min-height: 120px; resize: vertical; line-height: 1.6; }
     <h2 class="title" id="t-way"><span class="en">Location</span><span class="kr">오시는 길</span></h2>
     <p class="venue-addr">서울 서초구 강남대로 213 엘타워 양재</p>
     <button class="sketch" type="button" id="sketch-btn" aria-label="약도 크게 보기">
-      <img src="photos/map.jpg?v=3" alt="약도: 강남대로와 남부순환로가 만나는 양재역 9번 출구 아래 엘타워. 주변에 서초구청, 양재공원, 서울가정·행정법원" width="2000" height="1148" loading="lazy">
+      <img src="photos/map.jpg?v=6" alt="약도: 양재역 9번 출구 근처 엘타워. 위쪽 도곡동, 아래쪽 사당동, 왼쪽 강남역, 오른쪽 성남 방향. 주변에 서초구청, 서초문화예술회관" width="2000" height="786" loading="lazy">
     </button>
     <div class="map" id="naver-map" role="img" aria-label="엘타워 양재 위치 지도" hidden></div>
     <div class="navs">
-      <a id="nav-naver" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12Z"/></svg>네이버지도</a>
-      <a id="nav-tmap" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 18-8-8 18-2-8-8-2Z"/></svg>티맵</a>
-      <a id="nav-kakao" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 18-8-8 18-2-8-8-2Z"/></svg>카카오맵</a>
+      <a id="nav-naver" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 22s-7.5-6.4-7.5-12.5a7.5 7.5 0 0 1 15 0C19.5 15.6 12 22 12 22Zm0-9.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/></svg>네이버지도</a>
+      <a id="nav-tmap" href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v4.5h-5.5V21h-5V8.5H4Z"/></svg>티맵</a>
+      <a id="nav-kakao" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.5 2.5 2.5 10.6l7.6 3.3 3.3 7.6Z"/></svg>카카오맵</a>
     </div>
     <div class="ways">
       <div class="way"><h3>지하철</h3><p>3호선 / 신분당선 양재역 9번 출구에서 22m</p></div>
@@ -711,7 +711,7 @@ var CONFIG = {
   stage.addEventListener('touchend', function (e) { if (tx === null) return; var dx = e.changedTouches[0].clientX - tx; tx = null; if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1); });
 
   // Sketch map opens full screen
-  $('sketch-btn').addEventListener('click', function () { openViewer(['photos/map.jpg?v=3'], 0, [true]); });
+  $('sketch-btn').addEventListener('click', function () { openViewer(['photos/map.jpg?v=6'], 0, [true]); });
 
   // Naver map (shown only when NAVER_MAP_KEY is set)
   if (CONFIG.NAVER_MAP_KEY) {
