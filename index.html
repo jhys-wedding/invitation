@@ -16,7 +16,7 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Crimson+Pro:wght@300;400;500&family=Noto+Serif:wght@400&family=Inter:wght@400;500&family=Mrs+Saint+Delafield&family=Pinyon+Script&family=Ephesis&family=Cormorant+Garamond:ital,wght@1,500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Crimson+Pro:wght@300;400;500&family=Noto+Serif:wght@400&family=Inter:wght@400;500&family=Mrs+Saint+Delafield&family=Ephesis&family=Cormorant+Garamond:ital,wght@1,500&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 /* Layout: one 430px column on a blush-gray ground; each section centered, English title over Korean subtitle */
@@ -35,7 +35,6 @@
   --grotesk: "Inter", "Helvetica Neue", Arial, sans-serif;
   --ui: "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", sans-serif;
   --script: "Mrs Saint Delafield", cursive;
-  --title-script: "Pinyon Script", cursive;
   --title-sub: "Cormorant Garamond", "Times New Roman", serif;
   color-scheme: light;
 }
@@ -254,14 +253,14 @@ section { padding-block: 48px; text-align: center; }
 /* Ending */
 .ending { margin-top: 48px; padding-block: 0 72px; }
 .ending .ph { aspect-ratio: 4 / 5; max-width: 100%; }
-.ending-title { margin: 36px 0 0; font-family: var(--title-script); font-size: 48px; letter-spacing: 2px; line-height: 1; color: var(--rose); }
+.ending-title { margin: 36px 0 0; padding: 6px 24px; font-family: "Ephesis", cursive; font-size: 54px; letter-spacing: 0.5px; line-height: 1; color: var(--rose); }
 .quote { margin: 20px 0 0; font-size: 15px; line-height: 2.1; color: var(--text); }
 .quote cite { display: block; margin-top: 14px; font-style: normal; font-size: 13px; color: var(--muted); }
 
 footer { padding-block: 32px calc(36px + env(safe-area-inset-bottom, 0px)); background: var(--paper); text-align: center; display: grid; gap: 10px; justify-items: center; }
 footer .row { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
 footer .credit { margin: 14px 0 0; font-family: var(--en); font-size: 11px; letter-spacing: 0.02em; color: var(--muted); }
-footer .credit a { color: inherit; }
+footer .credit a { color: inherit; white-space: nowrap; }
 
 /* Dialogs: bottom sheets in the invitation's own ground, type and title */
 .modal {
