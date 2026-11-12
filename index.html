@@ -16,7 +16,7 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Crimson+Pro:wght@300;400;500&family=Noto+Serif:wght@400&family=Inter:wght@400;500&family=Mrs+Saint+Delafield&family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@1,500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Crimson+Pro:wght@300;400;500&family=Noto+Serif:wght@400&family=Inter:wght@400;500&family=Mrs+Saint+Delafield&family=Pinyon+Script&family=Ephesis&family=Cormorant+Garamond:ital,wght@1,500&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 /* Layout: one 430px column on a blush-gray ground; each section centered, English title over Korean subtitle */
@@ -82,10 +82,10 @@ a { color: inherit; }
 
 /* Cover title (reference: 39px script, 2px tracking / 14px italic, 0.5px tracking) */
 .cover-title { position: absolute; left: 0; right: 0; top: 50%; z-index: 1; text-align: center; color: #111; animation: ink 2.2s cubic-bezier(0.16, 1, 0.3, 1) both; }
-.cover-title p { margin: 0; text-transform: capitalize; text-shadow: 0 0 16px rgba(255, 255, 255, 0.7); }
+.cover-title p { margin: 0; text-shadow: 0 0 16px rgba(255, 255, 255, 0.7); }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.cover-title .t1 { font-family: var(--title-script); font-size: min(50px, 13.4vw); font-weight: 400; letter-spacing: 2px; line-height: 1.5; }
-.cover-title .t2 { margin-top: 2px; font-family: var(--title-sub); font-style: italic; font-weight: 500; font-size: 20px; letter-spacing: 0.5px; line-height: 1.4; }
+.cover-title .t1 { font-family: "Ephesis", cursive; font-size: min(50px, 12.8vw); font-weight: 400; letter-spacing: 0.5px; line-height: 1.2; white-space: nowrap; }
+.cover-title .t2 { margin-top: 0; font-family: "Ephesis", cursive; font-weight: 400; font-size: min(28px, 7.2vw); letter-spacing: 0.5px; line-height: 1.3; white-space: nowrap; }
 /* Background music toggle */
 .bgm-btn { position: fixed; top: calc(14px + env(safe-area-inset-top, 0px)); right: max(14px, calc(50vw - 215px + 14px)); z-index: 25; width: 36px; height: 36px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.72); color: var(--ink); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); cursor: pointer; }
 .bgm-btn svg { width: 17px; height: 17px; }
@@ -126,6 +126,15 @@ a { color: inherit; }
 .pill.dark { background: var(--ink); color: #fff; }
 .pill.dark svg { color: #fff; }
 
+/* Framed cover: photo as a cropped print on white, text below it */
+.cover.framed { height: auto; min-height: 0; display: flex; flex-direction: column; align-items: center; padding: 11vh 0 96px; background: #fff; overflow: visible; --zoom: 1; }
+.cover.framed::after { display: none; }
+.cover.framed .ph { position: relative; inset: auto; width: 69%; aspect-ratio: 1.15; overflow: hidden; background: #eee; }
+.cover.framed .ph > img { object-position: 50% 40%; transform: scale(var(--zoom)); transform-origin: 50% 35%; }
+.cover.framed .cover-title { position: static; margin-top: 30px; padding: 10px 28px; text-shadow: none; }
+.cover.framed .cover-title p { text-shadow: none; }
+.cover.framed .cover-info { position: static; margin-top: 30px; }
+.cover.framed .scroll-hint { background: rgba(26, 26, 26, 0.15); }
 /* Section frame */
 section { padding-block: 48px; text-align: center; }
 .divider { margin: 0 max(28px, env(safe-area-inset-left, 0px)); border: 0; border-top: 1px solid var(--line); }
@@ -149,21 +158,22 @@ section { padding-block: 48px; text-align: center; }
 .contact-row { margin-top: 36px; display: flex; justify-content: center; }
 
 /* Calendar */
-.cal-card { background: var(--paper); margin: 0 -4px; padding: 36px 20px 32px; border-radius: 4px; }
-.cal-date { margin: 0; font-family: var(--en); font-weight: 400; font-size: 20px; letter-spacing: 0.1em; font-variant-numeric: tabular-nums; color: var(--ink); display: flex; justify-content: center; gap: 14px; }
-.cal-sub { margin: 4px 0 24px; font-size: 13px; color: var(--muted); }
+.cal-card { background: var(--paper); margin: 0 -4px; padding: 0 20px 32px; border-radius: 4px; }
+.cal-date { margin: 0 0 30px; font-family: var(--kr); font-weight: 700; font-size: 17px; letter-spacing: 0; color: var(--ink); }
+.cal-date span { margin-left: 0.6em; }
 .cal { display: grid; grid-template-columns: repeat(7, 1fr); row-gap: 2px; padding-block: 18px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: var(--en); font-size: 15px; font-variant-numeric: tabular-nums; }
-.cal .dow { font-size: 12px; color: var(--muted); padding-bottom: 8px; font-family: var(--kr); }
-.cal .d { line-height: 2.5; color: var(--ink); }
+.cal .dow { font-size: 13px; color: var(--muted); padding-bottom: 10px; font-family: var(--kr); }
+.cal .dow.sun { color: var(--ink); }
+.cal .d { line-height: 2.35; color: var(--ink); }
 .cal .sun { color: var(--wine); }
 .cal .on span { display: inline-grid; place-items: center; width: 2.3em; height: 2.3em; border-radius: 50%; background: var(--rose); color: #fff; }
-.count { margin: 30px 0 0; display: flex; justify-content: center; align-items: flex-start; gap: 10px; font-family: var(--en); font-variant-numeric: tabular-nums; }
-.count div { min-width: 48px; }
-.count b { display: block; font-weight: 400; font-size: 24px; line-height: 1.2; color: var(--text); }
-.count small { font-size: 12px; letter-spacing: 0.06em; color: var(--muted); }
-.count i { font-style: normal; font-size: 18px; color: var(--muted); padding-top: 2px; }
-.dday { margin: 22px 0 0; font-size: 14px; }
-.dday b { color: var(--rose); font-weight: 700; }
+.count { margin: 34px 0 0; display: flex; justify-content: center; align-items: flex-start; gap: 12px; font-family: var(--en); font-variant-numeric: tabular-nums; }
+.count div { min-width: 46px; }
+.count b { display: block; font-size: 30px; line-height: 1.15; letter-spacing: 0; font-weight: 300; color: var(--text); }
+.count small { display: block; margin-top: 8px; font-size: 11px; letter-spacing: 0.1em; color: var(--muted); }
+.count i { font-style: normal; font-size: 16px; color: var(--muted); padding-top: 12px; }
+.dday { margin: 26px 0 0; font-size: 15px; color: var(--text); }
+.dday b { color: var(--ink); font-weight: 400; }
 
 /* Join us block */
 .join { padding-block: 48px 0; text-align: left; }
@@ -365,9 +375,9 @@ textarea.field { min-height: 120px; resize: vertical; line-height: 1.6; }
     <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>
     <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/><path d="M3 3l18 18"/></svg>
   </button>
-  <header class="cover light">
-    <div class="ph"><span class="ph-label">메인 사진 자리 · photos/main.jpg</span><img src="photos/main.jpg" alt="재형과 예솔" onerror="this.remove()"></div>
-    <div class="cover-title"><p class="t1">our first Page</p><p class="t2">We're getting married</p></div>
+  <header class="cover light framed">
+    <div class="ph"><span class="ph-label">메인 사진 자리 · photos/cover.jpg</span><img src="photos/cover.jpg" alt="재형과 예솔" onerror="this.remove()"></div>
+    <div class="cover-title"><p class="t1">Our First Page</p><p class="t2">We're getting married!</p></div>
     <div class="cover-info">
       <h1 class="sr-only">재형 &amp; 예솔</h1>
       <p class="when">2027.03.06 12:00 P.M.</p>
@@ -402,22 +412,13 @@ textarea.field { min-height: 120px; resize: vertical; line-height: 1.6; }
   <section class="wrap" aria-labelledby="t-date">
     <h2 class="title" id="t-date"><span class="en">Wedding Day</span><span class="kr">예식 일시</span></h2>
     <div class="cal-card">
-      <p class="cal-date"><span>MAR</span><span>06</span><span>2027</span></p>
-      <p class="cal-sub">토요일 낮 12시</p>
+      <p class="cal-date">2027년 3월 6일<span>토요일 12시</span></p>
       <div class="cal" id="cal" aria-label="2027년 3월 달력, 6일 예식"></div>
       <div class="count" id="count" aria-hidden="true"></div>
       <p class="dday" id="dday" aria-live="polite"></p>
     </div>
   </section>
 
-  <section class="join wrap" aria-label="예식 날짜">
-    <div class="join-grid">
-      <div class="lines"><span>Join us</span><span>as</span><span>we</span><span>become one</span></div>
-      <div class="big">06</div>
-      <div class="meta"><span>March 2027</span><span>Saturday</span><span>PM 12:00</span></div>
-    </div>
-    <div class="ph"><span class="ph-label">중간 사진 자리 · photos/middle.jpg</span><img src="photos/middle.jpg" alt="" onerror="this.remove()"></div>
-  </section>
 
   <section class="wrap" aria-labelledby="t-gallery">
     <h2 class="title" id="t-gallery"><span class="en">Gallery</span><span class="kr">우리의 순간</span></h2>
@@ -878,7 +879,8 @@ var CONFIG = {
       zTick = false; if (!coverImg) return;
       var dist = cover.offsetHeight * 1.6;                       // zoom spreads over 1.6x the cover height
       var t = Math.min(Math.max(scrollY / dist, 0), 1);
-      coverImg.style.transform = 'scale(' + (1 + t * 0.06).toFixed(4) + ')';   // max 6% larger
+      var base = parseFloat(getComputedStyle(cover).getPropertyValue('--zoom')) || 1;
+      coverImg.style.transform = 'scale(' + (base * (1 + t * 0.06)).toFixed(4) + ')';   // max 6% larger
     }
     addEventListener('scroll', function () { if (!zTick) { zTick = true; requestAnimationFrame(coverZoom); } }, { passive: true });
     coverZoom();
