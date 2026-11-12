@@ -87,7 +87,8 @@ a { color: inherit; }
 .cover-title .t1 { font-family: var(--title-script); font-size: min(50px, 13.4vw); font-weight: 400; letter-spacing: 2px; line-height: 1.5; }
 .cover-title .t2 { margin-top: 2px; font-family: var(--title-sub); font-style: italic; font-weight: 500; font-size: 20px; letter-spacing: 0.5px; line-height: 1.4; }
 /* Cover */
-.cover { position: relative; height: min(100svh, 760px); min-height: 560px; color: #efefef; }
+.cover { position: relative; height: min(var(--cover-h, 100svh), 760px); min-height: 560px; color: #efefef; overflow: hidden; }
+.cover .ph > img { transform-origin: 52% 45%; will-change: transform; }
 .cover .ph { position: absolute; inset: 0; background: linear-gradient(180deg, #6d6466 0%, #4a4244 100%); }
 .cover .ph-label { color: #d8d2d3; top: 64%; }
 .cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(20,16,17,0.55) 100%); pointer-events: none; }
@@ -829,6 +830,21 @@ var CONFIG = {
       if (r.top < innerHeight) t.classList.add('in'); else io.observe(t);
     });
     document.documentElement.classList.add('reveal-on');
+
+    // Cover: lock height once (address bar show/hide no longer resizes it) and zoom slowly over a long scroll
+    var cover = document.querySelector('.cover'), coverImg = cover && cover.querySelector('.ph > img'), lastW = innerWidth;
+    function lockCover() { document.documentElement.style.setProperty('--cover-h', innerHeight + 'px'); }
+    lockCover();
+    addEventListener('resize', function () { if (innerWidth !== lastW) { lastW = innerWidth; lockCover(); } });
+    var zTick = false;
+    function coverZoom() {
+      zTick = false; if (!coverImg) return;
+      var dist = cover.offsetHeight * 1.6;                       // zoom spreads over 1.6x the cover height
+      var t = Math.min(Math.max(scrollY / dist, 0), 1);
+      coverImg.style.transform = 'scale(' + (1 + t * 0.06).toFixed(4) + ')';   // max 6% larger
+    }
+    addEventListener('scroll', function () { if (!zTick) { zTick = true; requestAnimationFrame(coverZoom); } }, { passive: true });
+    coverZoom();
 
     // Parallax on the middle and ending photos
     var pars = [].slice.call(document.querySelectorAll('.parallax'));
