@@ -126,13 +126,15 @@ a { color: inherit; }
 .pill.dark svg { color: #fff; }
 
 /* Framed cover: photo as a cropped print on white, text below it */
-.cover.framed { height: auto; min-height: 0; display: flex; flex-direction: column; align-items: center; padding: 11vh 0 96px; background: #fff; overflow: visible; --zoom: 1; }
+.cover.framed { height: auto; min-height: 0; display: flex; flex-direction: column; align-items: center; padding: 13vh 0 84px; background: #fff; overflow: visible; --zoom: 1; }
 .cover.framed::after { display: none; }
-.cover.framed .ph { position: relative; inset: auto; width: 69%; aspect-ratio: 1.15; overflow: hidden; background: #eee; }
+.cover.framed .ph { position: relative; inset: auto; width: 66%; aspect-ratio: 1.15; overflow: hidden; background: #eee; }
 .cover.framed .ph > img { object-position: 50% 40%; transform: scale(var(--zoom)); transform-origin: 50% 35%; }
-.cover.framed .cover-title { position: static; margin-top: 30px; padding: 10px 28px; text-shadow: none; }
+.cover.framed .cover-title { position: static; width: calc(66% + 28px); margin-top: 22px; padding: 10px 14px; text-shadow: none; }
+.cover.framed .cover-title .t1 { text-align: left; margin-left: -12px; font-size: min(44px, 11.3vw); }
+.cover.framed .cover-title .t2 { text-align: right; margin-top: 4px; font-size: min(24px, 6.2vw); }
 .cover.framed .cover-title p { text-shadow: none; }
-.cover.framed .cover-info { position: static; margin-top: 30px; }
+.cover.framed .cover-info { position: static; width: 66%; margin-top: 48px; text-align: right; }
 .cover.framed .scroll-hint { background: rgba(26, 26, 26, 0.15); }
 /* Section frame */
 section { padding-block: 48px; text-align: center; }
