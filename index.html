@@ -16,7 +16,7 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Crimson+Pro:wght@300;400;500&family=Noto+Serif:wght@400&family=Inter:wght@400;500&family=Mrs+Saint+Delafield&family=Ephesis&family=Cormorant+Garamond:ital,wght@1,500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Ephesis&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 /* Layout: one 430px column on a blush-gray ground; each section centered, English title over Korean subtitle */
@@ -30,8 +30,8 @@
   --rose: #000000;
   --wine: #000000;
   --kr: "Gowun Batang", "Iropke Batang", "Nanum Myeongjo", serif;
-  --en: "Crimson Pro", "Times New Roman", serif;
-  --en-cover: "Noto Serif", Georgia, serif;
+  --en: "Cormorant Garamond", "Times New Roman", serif;
+  --en-cover: "Cormorant Garamond", Georgia, serif;
   --grotesk: "Inter", "Helvetica Neue", Arial, sans-serif;
   --ui: "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", sans-serif;
   --script: "Mrs Saint Delafield", cursive;
@@ -42,6 +42,7 @@
 [hidden] { display: none !important; }
 html { background: #ffffff; -webkit-text-size-adjust: 100%; }
 body {
+  font-variant-numeric: lining-nums;
   margin: 0;
   background: #ffffff;
   color: var(--text);
@@ -137,12 +138,16 @@ a { color: inherit; }
 .cover.framed .cover-info { position: static; width: 66%; margin-top: 48px; text-align: right; }
 .cover.framed .scroll-hint { background: rgba(26, 26, 26, 0.15); }
 /* Section frame */
-section { padding-block: 48px; text-align: center; }
+section.tint { background: #f9f9f9; padding-block: 72px; }
+section { padding-block: 56px; text-align: center; }
+/* Spacing rule: white|white = 56px + line + 56px, white|gray = 72px each side, no line */
+.tint + section { padding-top: 72px; }
+section:has(+ .tint) { padding-bottom: 72px; }
 .divider { margin: 0 max(28px, env(safe-area-inset-left, 0px)); border: 0; border-top: 1px solid var(--line); }
 .cover + section, .join + section { padding-top: 96px; }
 .title { margin: 0 0 40px; }
-.title .en { display: block; font-family: var(--en); font-size: 14px; letter-spacing: 0.14em; color: var(--rose); text-transform: uppercase; line-height: 1.4; }
-.title .kr { display: block; margin-top: 8px; font-family: var(--kr); font-size: 18px; font-weight: 400; color: var(--rose); line-height: 1.5; }
+.title .en { display: block; font-family: var(--en); font-style: italic; font-weight: 500; font-size: 18px; letter-spacing: 0.02em; color: var(--muted); line-height: 1.3; }
+.title .kr { display: block; margin-top: 6px; font-family: var(--kr); font-size: 19px; font-weight: 400; letter-spacing: 0; color: var(--ink); line-height: 1.5; }
 .body-text { margin: 0; white-space: pre-line; }
 
 /* Invitation */
@@ -159,26 +164,29 @@ section { padding-block: 48px; text-align: center; }
 .contact-row { margin-top: 36px; display: flex; justify-content: center; }
 
 /* Calendar */
-.cal-card { background: var(--paper); margin: 0 -4px; padding: 0 20px 32px; border-radius: 4px; }
+.cal-card { background: transparent; margin: 0 -4px; padding: 0 20px 0; border-radius: 4px; }
 .cal-date { margin: 0 0 30px; font-family: var(--kr); font-weight: 700; font-size: 17px; letter-spacing: 0; color: var(--ink); }
 .cal-date span { margin-left: 0.6em; }
-.cal { display: grid; grid-template-columns: repeat(7, 1fr); row-gap: 2px; padding-block: 18px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: var(--en); font-size: 15px; font-variant-numeric: tabular-nums; }
+.cal { display: grid; grid-template-columns: repeat(7, 1fr); row-gap: 2px; padding-block: 18px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: var(--en); font-size: 15px; font-variant-numeric: lining-nums tabular-nums; }
 .cal .dow { font-size: 13px; color: var(--muted); padding-bottom: 10px; font-family: var(--kr); }
 .cal .dow.sun { color: var(--ink); }
 .cal .d { line-height: 2.35; color: var(--ink); }
 .cal .sun { color: var(--wine); }
 .cal .on span { display: inline-grid; place-items: center; width: 2.3em; height: 2.3em; border-radius: 50%; background: var(--rose); color: #fff; }
-.count { margin: 34px 0 0; display: flex; justify-content: center; align-items: flex-start; gap: 12px; font-family: var(--en); font-variant-numeric: tabular-nums; }
+.count { margin: 34px 0 0; display: flex; justify-content: center; align-items: flex-start; gap: 12px; font-family: var(--en); font-variant-numeric: lining-nums tabular-nums; }
 .count div { min-width: 46px; }
 .count b { display: block; font-size: 30px; line-height: 1.15; letter-spacing: 0; font-weight: 300; color: var(--text); }
 .count small { display: block; margin-top: 8px; font-size: 11px; letter-spacing: 0.1em; color: var(--muted); }
 .count i { font-style: normal; font-size: 16px; color: var(--muted); padding-top: 12px; }
 .dday { margin: 26px 0 0; font-size: 15px; color: var(--text); }
 .dday b { color: var(--ink); font-weight: 400; }
+.dday::before, .dday::after { display: block; font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 52px; line-height: 0.6; color: #c4c4c4; }
+.dday::before { content: "\201C"; margin-bottom: 0; }
+.dday::after { content: "\201D"; margin-top: 18px; }
 
 /* Join us block */
 .join { padding-block: 48px 0; text-align: left; }
-.join-grid { display: grid; grid-template-columns: 1fr auto; gap: 18px; align-items: end; font-family: var(--en); font-size: 14px; letter-spacing: 0.1em; font-variant-numeric: tabular-nums; color: var(--wine); text-transform: uppercase; line-height: 1.5; }
+.join-grid { display: grid; grid-template-columns: 1fr auto; gap: 18px; align-items: end; font-family: var(--en); font-size: 14px; letter-spacing: 0.1em; font-variant-numeric: lining-nums tabular-nums; color: var(--wine); text-transform: uppercase; line-height: 1.5; }
 .join-grid .lines span { display: block; }
 .join-grid .big { font-family: var(--en); font-size: 64px; line-height: 0.9; letter-spacing: -0.02em; text-align: right; color: var(--wine); font-weight: 300; }
 .join-grid .meta { grid-column: 1 / -1; display: flex; justify-content: space-between; border-top: 1px solid rgba(0, 0, 0, 0.35); padding-top: 10px; }
@@ -194,7 +202,7 @@ section { padding-block: 48px; text-align: center; }
 
 /* Location */
 .venue-name { margin: 0; font-size: 16px; font-weight: 700; color: var(--ink); }
-.venue-addr { margin: 4px 0 0; }
+.venue-addr { margin: 0; }
 .venue-tel { margin: 2px 0 0; font-family: var(--en); font-size: 15px; }
 .sketch { display: block; width: calc(100% + 56px); max-width: none; margin: 28px -28px 0; padding: 0; border: 0; background: none; cursor: zoom-in; }
 .sketch img { display: block; width: 100%; height: auto; }
@@ -208,7 +216,9 @@ section { padding-block: 48px; text-align: center; }
 .navs svg { width: 16px; height: 16px; color: var(--rose); }
 .ways { margin-top: 36px; text-align: left; display: grid; }
 .way { padding-block: 22px; border-top: 1px solid var(--line); }
-.way:last-child { border-bottom: 1px solid var(--line); }
+.way:last-child { padding-bottom: 22px; }
+/* The divider after Location doubles as the last line of the transit list */
+section[aria-labelledby="t-way"] { padding-bottom: 0; }
 .way:first-child { border-top: 0; padding-top: 0; }
 .way h3 { margin: 0 0 6px; font-size: 14px; font-weight: 700; color: var(--ink); }
 .way p { margin: 0; }
@@ -238,22 +248,26 @@ section { padding-block: 48px; text-align: center; }
 .acc-tabs button[aria-selected="true"] { color: var(--ink); font-weight: 700; }
 .acc-tabs button[aria-selected="true"]::after { transform: scaleX(1); }
 .acc-tabs button:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; }
-.acc-panel { text-align: left; background: var(--paper); border-radius: 4px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04); }
-.acc-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 20px; }
+.acc-panel { text-align: left; background: transparent; }
+.acc-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 18px 2px; }
+.acc-row:last-child { border-bottom: 1px solid var(--line); }
 .acc-row + .acc-row { border-top: 1px solid var(--line); }
 .acc-info { min-width: 0; }
 .acc-head { display: flex; align-items: baseline; gap: 6px; }
 .acc-head span { font-family: var(--kr); font-size: 12px; color: var(--muted); }
 .acc-head b { color: var(--ink); font-size: 15px; }
-.acc-num { margin-top: 4px; font-family: var(--kr); font-size: 14px; color: var(--text); font-variant-numeric: tabular-nums; user-select: all; word-break: keep-all; }
+.acc-num { margin-top: 4px; font-family: var(--kr); font-size: 14px; color: var(--text); font-variant-numeric: lining-nums tabular-nums; user-select: all; word-break: keep-all; }
 .acc-btns { display: flex; gap: 6px; flex: none; }
 .copy, .kpay { min-height: 32px; padding: 0 10px; border-radius: 6px; font-family: var(--kr); font-size: 12px; text-decoration: none; display: inline-flex; align-items: center; }
 .copy { border: 1px solid var(--ink); background: var(--paper); color: var(--ink); cursor: pointer; }
 .copy:active { background: var(--ink); color: #fff; }
+.acc-panel .copy { width: 40px; height: 40px; min-height: 40px; padding: 0; justify-content: center; border: 1px solid #d6d6d6; border-radius: 50%; font-size: 0; }
+.acc-panel .copy::before { content: ""; width: 16px; height: 16px; background: currentColor; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='11' height='11' rx='2'/%3E%3Cpath d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='11' height='11' rx='2'/%3E%3Cpath d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'/%3E%3C/svg%3E") center / contain no-repeat; }
+.acc-panel .copy:active { background: var(--ink); color: #fff; border-color: var(--ink); }
 .kpay { border: 0; background: #ffeb00; color: #191600; font-weight: 600; }
 
 /* Ending */
-.ending { margin-top: 48px; padding-block: 0 72px; }
+.ending { margin-top: 16px; padding-block: 0 72px; }
 .ending .ph { aspect-ratio: 4 / 5; max-width: 100%; }
 .ending-title { margin: 36px 0 0; padding: 6px 24px; font-family: "Ephesis", cursive; font-size: 54px; letter-spacing: 0.5px; line-height: 1; color: var(--rose); }
 .quote { margin: 20px 0 0; font-size: 15px; line-height: 2.1; color: var(--text); }
@@ -278,6 +292,7 @@ footer .credit a { color: inherit; white-space: nowrap; }
 .modal-head { position: sticky; top: 0; z-index: 1; padding: 14px 20px 4px; background: var(--ground); text-align: center; }
 .modal-head::before { content: ""; display: block; width: 40px; height: 4px; margin: 0 auto 22px; border-radius: 2px; background: #d6cdd0; }
 .modal-head .title { margin: 0; }
+.modal-head .title .en { font-size: 16px; }
 .modal-head .title .kr { font-size: 17px; }
 .x { position: absolute; top: 12px; right: 10px; width: 44px; height: 44px; display: grid; place-items: center; border: 0; background: none; border-radius: 50%; color: var(--muted); }
 .x:hover { background: rgba(255, 255, 255, 0.6); }
@@ -310,7 +325,7 @@ textarea.field { min-height: 120px; resize: vertical; line-height: 1.6; }
 .stepper { display: inline-grid; grid-template-columns: 48px 64px 48px; align-items: center; border-radius: 4px; background: var(--paper); }
 .stepper button { height: 42px; border: 0; background: none; font-size: 18px; color: var(--ink); }
 .stepper button:disabled { color: var(--line); cursor: not-allowed; }
-.stepper output { text-align: center; font-family: var(--kr); font-size: 15px; color: var(--ink); font-variant-numeric: tabular-nums; }
+.stepper output { text-align: center; font-family: var(--kr); font-size: 15px; color: var(--ink); font-variant-numeric: lining-nums tabular-nums; }
 .submit { min-height: 54px; margin-top: 4px; border: 0; border-radius: 999px; background: var(--ink); color: #fff; font-family: var(--kr); font-size: 15px; font-weight: 700; box-shadow: 0 6px 18px rgba(26, 26, 26, 0.18); }
 .submit:disabled { opacity: 0.45; cursor: progress; }
 .msg { margin: -8px 0 0; min-height: 1.5em; text-align: center; font-family: var(--kr); font-size: 13px; color: var(--text); }
@@ -397,8 +412,8 @@ textarea.field { min-height: 120px; resize: vertical; line-height: 1.6; }
 오셔서 따뜻한 마음으로 축복해 주시면
 더없는 기쁨으로 간직하겠습니다.</p>
     <div class="parents">
-      <p><span><b>박현배 · 김순임</b></span><span class="rel">의 장남</span><span><b>재형</b></span></p>
-      <p><span><b>문충식 · 이향미</b></span><span class="rel">의 장녀</span><span><b>예솔</b></span></p>
+      <p><span><b>박현배 · 김순임</b></span><span class="rel">의 아들</span><span><b>재형</b></span></p>
+      <p><span><b>문충식 · 이향미</b></span><span class="rel">의 딸</span><span><b>예솔</b></span></p>
     </div>
     <div class="contact-row" id="contact-row">
       <button class="pill" type="button" data-open="dlg-contact">
@@ -408,9 +423,7 @@ textarea.field { min-height: 120px; resize: vertical; line-height: 1.6; }
     </div>
   </section>
 
-  <hr class="divider" aria-hidden="true">
-
-  <section class="wrap" aria-labelledby="t-date">
+  <section class="wrap tint" aria-labelledby="t-date">
     <h2 class="title" id="t-date"><span class="en">Wedding Day</span><span class="kr">예식 일시</span></h2>
     <div class="cal-card">
       <p class="cal-date">2027년 3월 6일<span>토요일 12시</span></p>
@@ -426,11 +439,11 @@ textarea.field { min-height: 120px; resize: vertical; line-height: 1.6; }
     <div class="gallery" id="gallery"></div>
   </section>
 
+  <hr class="divider" aria-hidden="true">
+
   <section class="wrap" aria-labelledby="t-way">
     <h2 class="title" id="t-way"><span class="en">Location</span><span class="kr">오시는 길</span></h2>
-    <p class="venue-name">엘타워 양재</p>
-    <p class="venue-addr">서울 서초구 강남대로 213 엘타워</p>
-    <p class="venue-tel">Tel. 02-526-8600</p>
+    <p class="venue-addr">서울 서초구 강남대로 213 엘타워 양재</p>
     <button class="sketch" type="button" id="sketch-btn" aria-label="약도 크게 보기">
       <img src="photos/map.jpg?v=3" alt="약도: 강남대로와 남부순환로가 만나는 양재역 9번 출구 아래 엘타워. 주변에 서초구청, 양재공원, 서울가정·행정법원" width="2000" height="1148" loading="lazy">
     </button>
@@ -445,6 +458,8 @@ textarea.field { min-height: 120px; resize: vertical; line-height: 1.6; }
       <div class="way"><h3>주차</h3><p>건물 내 주차장, 2시간 무료</p></div>
     </div>
   </section>
+
+  <hr class="divider" aria-hidden="true">
 
   <section class="wrap" aria-labelledby="t-gb" id="sec-gb">
     <h2 class="title" id="t-gb"><span class="en">Guestbook</span><span class="kr">방명록</span></h2>
