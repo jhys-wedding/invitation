@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>재형 ♥ 예솔 결혼합니다</title>
-<meta name="description" content="3월 6일 토요일 낮 12시 00분, 엘타워 양재">
+<meta name="description" content="3월 6일 토요일 낮 12시, 엘타워 6층 그레이스홀">
 <meta property="og:title" content="재형 ♥ 예솔 결혼합니다">
-<meta property="og:description" content="3월 6일 토요일 낮 12시 00분, 엘타워 양재">
+<meta property="og:description" content="3월 6일 토요일 낮 12시, 엘타워 6층 그레이스홀">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://jhys-wedding.github.io/invitation/">
 <meta property="og:image" content="https://jhys-wedding.github.io/invitation/og.jpg?v=3">
@@ -16,7 +16,7 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Ephesis&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Marcellus&family=Courier+Prime&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 /* Layout: one 430px column on a blush-gray ground; each section centered, English title over Korean subtitle */
@@ -30,13 +30,13 @@
   --rose: #000000;
   --wine: #000000;
   --kr: "Gowun Batang", "Iropke Batang", "Nanum Myeongjo", serif;
-  --en: "Cormorant Garamond", "Times New Roman", serif;
-  --en-cover: "Cormorant Garamond", Georgia, serif;
+  --en: "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", sans-serif;
+  --en-cover: "Pretendard Variable", Pretendard, sans-serif;
   --grotesk: "Inter", "Helvetica Neue", Arial, sans-serif;
   --ui: "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", sans-serif;
   --script: "Mrs Saint Delafield", cursive;
   --paper-tex: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35  0 0 0 0 0.32  0 0 0 0 0.28  0 0 0 0.16 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  --title-sub: "Cormorant Garamond", "Times New Roman", serif;
+  --title-sub: "Pretendard Variable", Pretendard, sans-serif;
   color-scheme: light;
 }
 * { box-sizing: border-box; }
@@ -85,8 +85,8 @@ a { color: inherit; }
 .cover-title { position: absolute; left: 0; right: 0; top: 50%; z-index: 1; text-align: center; color: #111; animation: ink 2.2s cubic-bezier(0.16, 1, 0.3, 1) both; }
 .cover-title p { margin: 0; text-shadow: 0 0 16px rgba(255, 255, 255, 0.7); }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.cover-title .t1 { font-family: "Ephesis", cursive; font-size: min(50px, 12.8vw); font-weight: 400; letter-spacing: 0.5px; line-height: 1.2; white-space: nowrap; }
-.cover-title .t2 { margin-top: 0; font-family: "Ephesis", cursive; font-weight: 400; font-size: min(28px, 7.2vw); letter-spacing: 0.5px; line-height: 1.3; white-space: nowrap; }
+.cover-title .t1 { font-family: var(--display); font-size: min(50px, 12.8vw); font-weight: 400; letter-spacing: 0.5px; line-height: 1.2; white-space: nowrap; }
+.cover-title .t2 { margin-top: 0; font-family: var(--display); font-weight: 400; font-size: min(28px, 7.2vw); letter-spacing: 0.5px; line-height: 1.3; white-space: nowrap; }
 /* Background music toggle */
 .bgm-btn { position: fixed; top: calc(14px + env(safe-area-inset-top, 0px)); right: max(14px, calc(50vw - 215px + 14px)); z-index: 25; width: 36px; height: 36px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.72); color: var(--ink); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); cursor: pointer; }
 .bgm-btn svg { width: 17px; height: 17px; }
@@ -162,6 +162,21 @@ section:has(+ .tint) { padding-bottom: 72px; }
 .parents .rel { color: var(--muted); font-size: 13px; }
 .parents b { font-weight: 700; }
 @media (max-width: 340px) { .parents { font-size: 14px; gap: 8px 6px; } .parents .rel { font-size: 12px; } }
+/* ticket frame (concave corners): parents, venue address */
+.parents, .venue-addr {
+  --notch: 16px;
+  padding: 34px 22px; background: #f2f2f2;
+  -webkit-mask:
+    radial-gradient(circle var(--notch) at top left, #0000 98%, #000) top left / 51% 51% no-repeat,
+    radial-gradient(circle var(--notch) at top right, #0000 98%, #000) top right / 51% 51% no-repeat,
+    radial-gradient(circle var(--notch) at bottom left, #0000 98%, #000) bottom left / 51% 51% no-repeat,
+    radial-gradient(circle var(--notch) at bottom right, #0000 98%, #000) bottom right / 51% 51% no-repeat;
+          mask:
+    radial-gradient(circle var(--notch) at top left, #0000 98%, #000) top left / 51% 51% no-repeat,
+    radial-gradient(circle var(--notch) at top right, #0000 98%, #000) top right / 51% 51% no-repeat,
+    radial-gradient(circle var(--notch) at bottom left, #0000 98%, #000) bottom left / 51% 51% no-repeat,
+    radial-gradient(circle var(--notch) at bottom right, #0000 98%, #000) bottom right / 51% 51% no-repeat;
+}
 .contact-row { margin-top: 36px; display: flex; justify-content: center; }
 
 /* Calendar */
@@ -181,7 +196,7 @@ section:has(+ .tint) { padding-bottom: 72px; }
 .count i { font-style: normal; font-size: 16px; color: var(--muted); padding-top: 12px; }
 .dday { margin: 26px 0 0; font-size: 15px; color: var(--text); }
 .dday b { color: var(--ink); font-weight: 400; }
-.dday::before, .dday::after { display: block; font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 52px; line-height: 0.6; color: #c4c4c4; }
+.dday::before, .dday::after { display: block; font-family: var(--display); font-style: normal; font-size: 52px; line-height: 0.6; color: #c4c4c4; }
 .dday::before { content: "\201C"; margin-bottom: 0; }
 .dday::after { content: "\201D"; margin-top: 18px; }
 
@@ -200,6 +215,24 @@ section:has(+ .tint) { padding-bottom: 72px; }
 .g-item img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
 .g-item:hover img { transform: scale(1.04); }
 .g-item .n { position: absolute; left: 8px; bottom: 4px; font-family: var(--en); font-size: 12px; color: #5e5759; }
+
+/* Photo book */
+.pbook { margin-top: 4px; }
+.pb-nav { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 18px; }
+.pb-arrow { width: 32px; height: 32px; padding: 0; border: 0; background: none; font-size: 22px; line-height: 1; color: var(--muted); cursor: pointer; }
+.pb-arrow:disabled { opacity: 0.25; cursor: default; }
+.pb-dots { display: flex; gap: 6px; }
+.pb-dots button { width: 26px; height: 26px; padding: 0; border: 0; border-radius: 50%; background: none; font-family: var(--display); font-size: 15px; font-variant-numeric: lining-nums; color: var(--muted); cursor: pointer; }
+.pb-dots button[aria-current="true"] { background: #d9d9d9; color: var(--ink); }
+.pb-pages { position: relative; margin-inline: -8px; touch-action: pan-y; }
+.pb-page { position: relative; display: none; }
+.pb-page.on { display: block; }
+.pb-item { position: absolute; padding: 5px; border: 0; background: #fff; box-shadow: 0 8px 22px rgba(0, 0, 0, 0.10), 0 1px 3px rgba(0, 0, 0, 0.06); cursor: zoom-in; }
+.pb-item img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; background: #e8e8e8; }
+.pb-item { --r: 0deg; transform: rotate(var(--r)); opacity: 0; }
+.pb-item.up { animation: pbUp 1s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: var(--d, 0ms); }
+@keyframes pbUp { from { opacity: 0; transform: translateY(48px) rotate(var(--r)); } to { opacity: 1; transform: translateY(0) rotate(var(--r)); } }
+@media (prefers-reduced-motion: reduce) { .pb-item { opacity: 1; } .pb-item.up { animation: none; } }
 
 /* Location */
 .venue-name { margin: 0; font-size: 16px; font-weight: 700; color: var(--ink); }
@@ -270,7 +303,7 @@ section[aria-labelledby="t-way"] { padding-bottom: 0; }
 /* Ending */
 .ending { margin-top: 16px; padding-block: 0 72px; }
 .ending .ph { aspect-ratio: 4 / 5; max-width: 100%; }
-.ending-title { margin: 36px 0 0; padding: 6px 24px; font-family: "Ephesis", cursive; font-size: 54px; letter-spacing: 0.5px; line-height: 1; color: var(--rose); }
+.ending-title { margin: 36px 0 0; padding: 6px 24px; font-family: var(--display); font-size: 54px; letter-spacing: 0.5px; line-height: 1; color: var(--rose); }
 .quote { margin: 20px 0 0; font-size: 15px; line-height: 2.1; color: var(--text); }
 .quote cite { display: block; margin-top: 14px; font-style: normal; font-size: 13px; color: var(--muted); }
 
@@ -382,6 +415,116 @@ textarea.field { min-height: 120px; resize: vertical; line-height: 1.6; }
   .reveal-on .rv { opacity: 1; transform: none; }
   .scroll-hint { display: none; }
 }
+
+/* ===== Editorial pass: titles in serif (명조), body in sans (고딕) ===== */
+:root { --display: "Marcellus", "Times New Roman", serif; --sans: "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", sans-serif; }
+body { font-family: var(--sans); letter-spacing: -0.01em; }
+/* Cover: big didone title, small sans caps, photo, sans date */
+.cover.editorial { padding: 15vh 0 64px; }
+.cover.editorial .cover-title { order: 0; width: 100%; margin: 0; padding: 10px 20px; text-align: center; animation: none; }
+.cover.editorial .cover-title .t1 .amp { display: block; margin: 6px 0 8px; font-style: normal; font-weight: 400; font-size: 0.55em; text-transform: none; line-height: 1; }
+.cover.editorial .cover-title .t1 { margin: 0; font-family: var(--display); font-weight: 400; font-size: min(50px, 12.8vw); line-height: 0.95; letter-spacing: 0; text-transform: uppercase; text-align: center; white-space: normal; }
+.cover.editorial .cover-title .t2 { margin-top: 18px; font-family: var(--display); font-style: italic; font-weight: 500; font-size: 21px; line-height: 1.35; letter-spacing: 0.01em; text-transform: none; text-align: center; white-space: normal; }
+.cover.editorial .ph { order: 1; width: 58%; aspect-ratio: 0.8; margin-top: 34px; }
+.cover.editorial .ph > img { object-position: 50% 45%; }
+.cover.editorial .cover-info { order: 2; width: auto; margin-top: 18px; text-align: center; }
+.cover.editorial .cover-info .when { font-family: var(--display); font-style: italic; font-weight: 500; font-size: 18px; letter-spacing: 0.02em; font-variant-numeric: lining-nums; }
+/* Section titles: sans eyebrow + serif title */
+.title .en { font-family: var(--display); font-style: italic; font-weight: 500; font-size: 19px; letter-spacing: 0.01em; text-transform: none; color: var(--muted); }
+.title .kr { margin-top: 4px; font-family: var(--kr); font-size: 21px; color: var(--ink); }
+/* Body copy and data in sans */
+.body-text, .way, .acc-head, .acc-num, .acc-tabs button, .quote, .contact, .gb-meta, .gb-tag { font-family: var(--sans); }
+.cal, .count, .cal .dow { font-family: var(--sans); }
+.count b { font-family: var(--display); font-weight: 400; font-variant-numeric: lining-nums; }
+.count small { font-family: var(--sans); font-weight: 500; letter-spacing: 0.12em; }
+.cal-date { font-family: var(--kr); font-weight: 700; font-size: 19px; }
+.cal-date span { font-weight: 400; }
+.venue-addr { padding: 26px 20px; font-family: var(--kr); font-weight: 700; font-size: 17px; line-height: 1.7; }
+.venue-hall { display: block; }
+.cover.editorial .cover-info .hall { margin: 0; line-height: 1.4; font-family: var(--display); font-style: italic; font-weight: 500; font-size: 16px; letter-spacing: 0.02em; font-variant-numeric: lining-nums; color: #2b2326; }
+.cover.editorial .cover-info .when { line-height: 1.4; }
+footer .credit { font-family: var(--sans); }
+.ending-title { font-family: var(--display); font-weight: 400; font-size: min(48px, 12.3vw); line-height: 0.95; letter-spacing: 0; text-transform: uppercase; padding: 6px 20px; }
+
+/* ===== Wedding day on black ===== */
+section.tint { background: #3a3a3a; color: #fff; }
+section.tint .title .en { color: rgba(255, 255, 255, 0.6); }
+section.tint .title .kr, section.tint .cal-date { color: #fff; }
+section.tint .cal { border-color: rgba(255, 255, 255, 0.18); }
+section.tint .cal .d, section.tint .cal .sun, section.tint .cal .dow.sun { color: #fff; }
+section.tint .cal .dow { color: rgba(255, 255, 255, 0.5); }
+section.tint .cal .on span { background: #fff; color: #3a3a3a; }
+section.tint .count { display: none; }
+section.tint .dday { margin-top: 36px; font-family: var(--display); font-weight: 400; font-size: 46px; font-variant-numeric: lining-nums; line-height: 1; letter-spacing: 0.01em; color: #fff; }
+section.tint .dday::before, section.tint .dday::after { content: none; }
+/* Sub English: typewriter (Courier Prime) */
+:root { --mono: "Courier Prime", "Courier New", monospace; }
+.cover.editorial .cover-title .t2 { margin-top: 22px; font-family: var(--mono); font-style: normal; font-weight: 400; font-size: 12.5px; letter-spacing: 0.1em; text-transform: uppercase; }
+.cover.editorial .cover-info .when { font-family: var(--mono); font-style: normal; font-weight: 400; font-size: 14px; letter-spacing: 0.02em; }
+.cover.editorial .cover-info .hall { margin-top: 2px; font-family: var(--mono); font-style: normal; font-weight: 400; font-size: 12.5px; letter-spacing: 0.04em; }
+.title .en { font-family: var(--mono); font-style: normal; font-weight: 400; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; }
+/* Polish */
+.title .en { color: #555; }
+section.tint .title .en { color: rgba(255, 255, 255, 0.72); }
+section.tint .dday { font-family: var(--kr); font-weight: 400; font-size: 40px; letter-spacing: 0.02em; }
+.pb-dots button { font-family: var(--mono); font-size: 13px; }
+.parents { font-family: var(--kr); font-size: 15.5px; }
+.parents b { font-weight: 700; }
+.parents .rel { font-family: var(--kr); font-size: 13px; }
+.quote cite { font-family: var(--kr); font-size: 15px; letter-spacing: 0.08em; color: var(--ink); margin-top: 20px; }
+.ending { padding-bottom: 36px; }
+.way h3 { display: flex; align-items: center; gap: 6px; }
+.way-ic { width: 18px; height: 18px; flex: none; color: var(--ink); }
+.way p { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+.line { display: inline-flex; align-items: center; justify-content: center; min-width: 18px; height: 18px; padding: 0 6px; border-radius: 9px; font-size: 11px; font-weight: 700; line-height: 1; color: #fff; }
+.line.l3 { padding: 0; background: #ef7c1c; }
+.line.lsb { background: #d4003b; margin-right: 4px; }
+.acc-intro { margin: -8px 0 28px; font-size: 14px; line-height: 1.8; color: var(--muted); }
+/* Nav buttons: separate tappable buttons */
+.navs, .sketch + .map[hidden] + .navs, .map[hidden] + .navs { margin: 24px 0 0; border: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.navs a { min-height: 48px; border: 0; border-radius: 10px; background: #f2f2f2; box-shadow: none; font-size: 13px; font-weight: 500; transition: background 0.2s, transform 0.1s; }
+.navs a + a { border-left: 0; }
+.navs a:hover { background: #ebebeb; }
+.navs a:active { transform: scale(0.97); background: #e4e4e4; }
+.navs + .ways { margin-top: 32px; }
+/* parents & address: no frame, emphasized top/bottom rules */
+.parents, .venue-addr { -webkit-mask: none; mask: none; border: 0; background: none; }
+.parents { margin-top: 48px; padding: 0; }
+.venue-addr { padding: 0; }
+/* Key info: one size (parents, date, address) */
+.parents, .cal-date, .venue-addr { font-size: 16px; }
+.cal-date { margin-bottom: 26px; }
+section.tint .dday { font-size: 32px; }
+/* Ending quote = invitation body text */
+.quote { font-size: 14px; line-height: 1.9; }
+/* Account: dark block like Wedding Day */
+section[aria-labelledby="t-way"].before-tint { padding-bottom: 72px; }
+section[aria-labelledby="t-way"].before-tint .way:last-child { padding-bottom: 0; }
+.tint + .ending { margin-top: 0; padding-top: 56px; }
+section.tint.soft { background: var(--paper-tex), #efefef; color: var(--text); }
+section.tint.soft .title .en { color: #555; }
+section.tint.soft .title .kr { color: var(--ink); }
+section.tint.soft .acc-tabs { border-bottom-color: #d4d4d4; }
+section.tint.soft .acc-row + .acc-row, section.tint.soft .acc-row:last-child { border-color: #d9d9d9; }
+section.tint.soft .acc-panel .copy { background: #fff; border-color: #fff; }
+section.tint.soft .acc-panel .copy:active { background: var(--ink); border-color: var(--ink); color: #fff; }
+/* Ending mirrors the cover: title, small photo, words */
+.ending { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.ending .ending-title { margin-top: 0; }
+.ending .ph { width: 58%; aspect-ratio: 0.8; margin-top: 34px; overflow: hidden; }
+.ending .ph > img { object-position: 50% 50%; }
+.ending > .wrap { width: 100%; box-sizing: border-box; }
+.tint + .ending { padding-top: 72px; }
+/* Cover intro: names rise, mono lines type, photo unveils */
+.cover.intro .t1, .cover.intro .scroll-hint { opacity: 0; }
+.cover.intro .t1.show { animation: introUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes introUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+.cover.intro .ph { opacity: 0; }
+.cover.intro .ph.show { opacity: 1; transition: opacity 1.6s ease; }
+.cover.intro .scroll-hint.show { opacity: 1; transition: opacity 0.8s ease; }
+.tw-off { visibility: hidden; }
+.tw-caret { display: inline-block; width: 0; height: 1em; margin-right: -1px; border-right: 1px solid currentColor; vertical-align: -0.12em; animation: twBlink 0.9s steps(1) infinite; }
+@keyframes twBlink { 50% { opacity: 0; } }
 </style>
 </head>
 <body>
@@ -392,12 +535,13 @@ textarea.field { min-height: 120px; resize: vertical; line-height: 1.6; }
     <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>
     <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/><path d="M3 3l18 18"/></svg>
   </button>
-  <header class="cover light framed">
+  <header class="cover light framed editorial">
+    <div class="cover-title"><p class="t1">Jae Hyeong<span class="amp">&amp;</span>Ye Sol</p><p class="t2">We're getting married</p></div>
     <div class="ph"><span class="ph-label">메인 사진 자리 · photos/cover.jpg</span><img src="photos/cover.jpg" alt="재형과 예솔" onerror="this.remove()"></div>
-    <div class="cover-title"><p class="t1">Our First Page</p><p class="t2">We're getting married!</p></div>
     <div class="cover-info">
       <h1 class="sr-only">재형 &amp; 예솔</h1>
-      <p class="when">2027.03.06 12:00 P.M.</p>
+      <p class="when">2027.3.6.SAT. 12:00 pm</p>
+      <p class="hall">EL TOWER 6F, Grace Hall</p>
     </div>
     <span class="scroll-hint" aria-hidden="true"></span>
   </header>
@@ -405,13 +549,13 @@ textarea.field { min-height: 120px; resize: vertical; line-height: 1.6; }
 
   <section class="wrap" aria-labelledby="t-invite">
     <h2 class="title" id="t-invite"><span class="en">Invitation</span><span class="kr">소중한 분들을 초대합니다</span></h2>
-    <p class="body-text">서로 다른 계절을 지나온 두 사람이
-이제 같은 계절을 함께 맞이하려 합니다.
+    <p class="body-text">서로에게 가장 편안한 사람이 된 두 사람이
+이제 평생을 함께하려 합니다.
 
-늘 곁에서 아껴 주신 분들을 모시고
-사랑의 약속을 나누고자 하오니
-오셔서 따뜻한 마음으로 축복해 주시면
-더없는 기쁨으로 간직하겠습니다.</p>
+저희의 새로운 시작을
+가까이에서 지켜봐 주시고
+따뜻한 마음으로 축복해 주시면
+감사하겠습니다.</p>
     <div class="parents">
       <p><span><b>박현배 · 김순임</b></span><span class="rel">의 아들</span><span><b>재형</b></span></p>
       <p><span><b>문충식 · 이향미</b></span><span class="rel">의 딸</span><span><b>예솔</b></span></p>
@@ -436,15 +580,22 @@ textarea.field { min-height: 120px; resize: vertical; line-height: 1.6; }
 
 
   <section class="wrap" aria-labelledby="t-gallery">
-    <h2 class="title" id="t-gallery"><span class="en">Gallery</span><span class="kr">우리의 순간</span></h2>
-    <div class="gallery" id="gallery"></div>
+    <h2 class="title" id="t-gallery"><span class="en">Photo Book</span><span class="kr">우리의 순간</span></h2>
+    <div class="pbook" id="gallery">
+      <div class="pb-nav">
+        <button type="button" class="pb-arrow" id="pb-prev" aria-label="이전 페이지">&lsaquo;</button>
+        <div class="pb-dots" id="pb-dots"></div>
+        <button type="button" class="pb-arrow" id="pb-next" aria-label="다음 페이지">&rsaquo;</button>
+      </div>
+      <div class="pb-pages" id="pb-pages"></div>
+    </div>
   </section>
 
   <hr class="divider" aria-hidden="true">
 
   <section class="wrap" aria-labelledby="t-way">
     <h2 class="title" id="t-way"><span class="en">Location</span><span class="kr">오시는 길</span></h2>
-    <p class="venue-addr">서울 서초구 강남대로 213 엘타워 양재</p>
+    <p class="venue-addr">서울 서초구 강남대로 213<span class="venue-hall">엘타워 6층 그레이스홀</span></p>
     <button class="sketch" type="button" id="sketch-btn" aria-label="약도 크게 보기">
       <img src="photos/map.jpg?v=8" alt="약도: 양재역 9번 출구 근처 엘타워. 위쪽 도곡동, 아래쪽 사당동, 왼쪽 강남역, 오른쪽 성남 방향. 주변에 서초구청, 서초문화예술회관" width="2000" height="824" loading="lazy">
     </button>
@@ -455,8 +606,8 @@ textarea.field { min-height: 120px; resize: vertical; line-height: 1.6; }
       <a id="nav-kakao" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.5 2.5 2.5 10.6l7.6 3.3 3.3 7.6Z"/></svg>카카오맵</a>
     </div>
     <div class="ways">
-      <div class="way"><h3>지하철</h3><p>3호선 / 신분당선 양재역 9번 출구에서 22m</p></div>
-      <div class="way"><h3>주차</h3><p>건물 내 주차장, 2시간 무료</p></div>
+      <div class="way"><h3><svg class="way-ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="14" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 11h14" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="14" r="1.1" fill="currentColor"/><circle cx="15" cy="14" r="1.1" fill="currentColor"/><path d="M8.5 17 6.5 21M15.5 17l2 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>지하철</h3><p><span class="line l3">3</span><span class="line lsb">신분당</span>양재역 9번 출구에서 22m</p></div>
+      <div class="way"><h3><svg class="way-ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 17V7h3.2a3 3 0 0 1 0 6H10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>주차</h3><p>건물 내 주차장, 2시간 무료</p></div>
     </div>
   </section>
 
@@ -472,17 +623,15 @@ textarea.field { min-height: 120px; resize: vertical; line-height: 1.6; }
     </div>
   </section>
 
-
-  <hr class="divider" aria-hidden="true">
-
-  <section class="wrap" aria-labelledby="t-acc" id="sec-acc">
+  <section class="wrap tint soft" aria-labelledby="t-acc" id="sec-acc">
     <h2 class="title" id="t-acc"><span class="en">Account</span><span class="kr">마음 전하실 곳</span></h2>
+    <p class="acc-intro">참석이 어려우신 분들을 위해 기재하였습니다.<br>너그러운 마음으로 양해 부탁드립니다.</p>
     <div id="accounts"></div>
   </section>
 
   <section class="ending" aria-label="맺음말">
-    <div class="ph parallax"><span class="ph-label">마무리 사진 자리 · photos/ending.jpg</span><img src="photos/ending.jpg" alt="" onerror="this.remove()"></div>
     <p class="ending-title" aria-hidden="true">Thank you</p>
+    <div class="ph"><span class="ph-label">마무리 사진 자리 · photos/ending.jpg</span><img src="photos/ending.jpg" alt="" onerror="this.remove()"></div>
     <div class="wrap">
       <p class="quote">함께 걸어온 날보다<br>함께 걸어갈 날이 더 많기에<br>오늘의 약속을 오래 아끼겠습니다.<cite>재형 · 예솔</cite></p>
     </div>
@@ -631,9 +780,10 @@ var CONFIG = {
   $('contact-row').hidden = !hasTel;
   $('sec-acc').hidden = !hasAcc;
   $('sec-gb').hidden = !CONFIG.ENDPOINT || !CONFIG.SHOW_GUESTBOOK;
-  // the divider after the guestbook goes with it, so two lines never stack
-  var gbLine = $('sec-gb').nextElementSibling;
+  // the divider before the guestbook goes with it; without the guestbook, Location runs straight into the dark Account block
+  var gbLine = $('sec-gb').previousElementSibling;
   if (gbLine && gbLine.classList.contains('divider')) gbLine.hidden = $('sec-gb').hidden;
+  if ($('sec-gb').hidden) document.querySelector('section[aria-labelledby="t-way"]').classList.add('before-tint');
   var fab = $('fab-rsvp');
   fab.hidden = !CONFIG.ENDPOINT;
   // Show the floating button once the cover has scrolled away, hide it at the footer and while a sheet is open
@@ -679,24 +829,63 @@ var CONFIG = {
   var count = $('count'), dday = $('dday');
   function tick() {
     var diff = W - new Date();
-    if (diff <= 0) { count.hidden = true; dday.textContent = new Date().toDateString() === WD.toDateString() ? '오늘은 재형, 예솔의 결혼식 날입니다.' : '재형, 예솔의 결혼식을 함께해 주셔서 감사합니다.'; return; }
+    if (diff <= 0) { count.hidden = true; dday.textContent = new Date().toDateString() === WD.toDateString() ? 'D-Day' : 'Thank you'; return; }
     var d = Math.floor(diff / 864e5), h = Math.floor(diff / 36e5) % 24, m = Math.floor(diff / 6e4) % 60, s = Math.floor(diff / 1e3) % 60;
     count.innerHTML = '<div><b>' + d + '</b><small>DAYS</small></div><i>:</i><div><b>' + two(h) + '</b><small>HOUR</small></div><i>:</i><div><b>' + two(m) + '</b><small>MIN</small></div><i>:</i><div><b>' + two(s) + '</b><small>SEC</small></div>';
     var today = new Date(); today.setHours(0, 0, 0, 0);
-    dday.innerHTML = '재형, 예솔의 결혼식이 <b>' + Math.round((WD - today) / 864e5) + '</b>일 남았습니다.';
+    dday.textContent = 'D-' + Math.round((WD - today) / 864e5);
   }
   tick(); setInterval(tick, 1000);
 
   // Gallery + viewer
-  var gallery = $('gallery'), loaded = [];
-  CONFIG.PHOTOS.forEach(function (src, i) {
-    var b = el('button', 'g-item'); b.type = 'button'; b.setAttribute('aria-label', '사진 ' + (i + 1) + ' 크게 보기');
-    b.appendChild(el('span', 'n', two(i + 1)));
-    var img = el('img'); img.alt = ''; img.loading = 'lazy'; img.decoding = 'async'; img.src = src.replace('photos/', 'photos/thumbs/');
-    img.onload = function () { loaded[i] = true; }; img.onerror = function () { img.remove(); };
-    b.appendChild(img); b.addEventListener('click', function () { openViewer(CONFIG.PHOTOS, i, loaded); });
-    gallery.appendChild(b);
-  });
+  var loaded = [];
+  // 포토북: 한 페이지 6장, 좌우로 엇갈린 배치 (390px 기준 좌표, 행 높이 200)
+  var PB_SLOTS = [
+    { x: 46, y: 8, w: 118, ar: 3 / 4 }, { x: 200, y: 30, w: 150, ar: 4 / 3 },
+    { x: 52, y: 20, w: 112, ar: 1 }, { x: 222, y: 2, w: 116, ar: 3 / 4 },
+    { x: 32, y: 22, w: 148, ar: 4 / 3 }, { x: 224, y: 0, w: 116, ar: 3 / 4 }
+  ];
+  var pbPages = $('pb-pages'), pbDots = $('pb-dots'), pages = [], dots = [], pg = 0;
+  var perPage = PB_SLOTS.length, nPages = Math.ceil(CONFIG.PHOTOS.length / perPage);
+  for (var p = 0; p < nPages; p++) {
+    var page = el('div', 'pb-page'), items = CONFIG.PHOTOS.slice(p * perPage, (p + 1) * perPage);
+    var rows = Math.ceil(items.length / 2), H = rows * 200 - 20;
+    page.style.aspectRatio = '390 / ' + H;
+    items.forEach(function (src, k) {
+      var i = p * perPage + k, sl = PB_SLOTS[k];
+      if (k === items.length - 1 && k % 2 === 0) sl = { x: 120, y: 24, w: 150, ar: 4 / 3 }; // 한 줄에 혼자 남은 사진은 가운데
+      var b = el('button', 'pb-item'); b.type = 'button'; b.setAttribute('aria-label', '사진 ' + (i + 1) + ' 크게 보기');
+      b.style.cssText = 'left:' + (sl.x / 3.9) + '%;top:' + ((Math.floor(k / 2) * 200 + sl.y) / H * 100) + '%;width:' + (sl.w / 3.9) + '%;aspect-ratio:' + sl.ar + ';--d:' + (k % 2) * 140 + 'ms';
+      var img = el('img'); img.alt = ''; img.loading = 'lazy'; img.decoding = 'async'; img.src = src.replace('photos/', 'photos/thumbs/');
+      img.onload = function () { loaded[i] = true; };
+      b.appendChild(img); b.addEventListener('click', function () { openViewer(CONFIG.PHOTOS, i, loaded); });
+      page.appendChild(b);
+    });
+    pbPages.appendChild(page); pages.push(page);
+    var d = el('button', '', String(p + 1)); d.type = 'button'; d.setAttribute('aria-label', (p + 1) + '페이지');
+    (function (n) { d.addEventListener('click', function () { showPage(n); }); })(p);
+    pbDots.appendChild(d); dots.push(d);
+  }
+  function showPage(n) {
+    if (n < 0 || n >= nPages) return;
+    pg = n;
+    pages.forEach(function (x, j) { x.classList.toggle('on', j === n); });
+    dots.forEach(function (x, j) { x.setAttribute('aria-current', j === n ? 'true' : 'false'); });
+    $('pb-prev').disabled = n === 0; $('pb-next').disabled = n === nPages - 1;
+  }
+  $('pb-prev').addEventListener('click', function () { showPage(pg - 1); });
+  $('pb-next').addEventListener('click', function () { showPage(pg + 1); });
+  var pbx = null;
+  pbPages.addEventListener('touchstart', function (e) { pbx = e.touches[0].clientX; }, { passive: true });
+  pbPages.addEventListener('touchend', function (e) { if (pbx === null) return; var dx = e.changedTouches[0].clientX - pbx; pbx = null; if (Math.abs(dx) > 50) showPage(pg + (dx < 0 ? 1 : -1)); });
+  if (nPages < 2) $('gallery').querySelector('.pb-nav').hidden = true;
+  // 사진이 화면에 들어올 때 한 장씩 아래에서 떠오름
+  var pbItems = [].slice.call(pbPages.querySelectorAll('.pb-item'));
+  if ('IntersectionObserver' in window) {
+    var pbIo = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('up'); pbIo.unobserve(e.target); } }); }, { rootMargin: '0px 0px -12% 0px' });
+    pbItems.forEach(function (it) { pbIo.observe(it); });
+  } else pbItems.forEach(function (it) { it.classList.add('up'); });
+  showPage(0);
   var viewer = $('viewer'), stage = $('v-stage'), vCount = $('v-count');
   var vList = [], vLoaded = [], cur = 0;
   function renderViewer() {
@@ -880,7 +1069,7 @@ var CONFIG = {
   // Scroll reveal: content is visible by default; hiding only starts once the observer is ready
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if ('IntersectionObserver' in window && !reduce) {
-    var targets = document.querySelectorAll('section .title, section .body-text, .parents, .contact-row, .cal-card, .join-grid, .join .ph, .gallery, .venue-name, .navs, .ways, .gb-track, .gb-actions, .rsvp-card, #accounts, .ending .ph, .ending-title, .quote');
+    var targets = document.querySelectorAll('section .title, section .body-text, .parents, .contact-row, .cal-card, .join-grid, .join .ph, .pb-nav, .venue-name, .navs, .ways, .gb-track, .gb-actions, .rsvp-card, #accounts, .ending .ph, .ending-title, .quote');
     var io = new IntersectionObserver(function (list) {
       list.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
@@ -926,6 +1115,50 @@ var CONFIG = {
 
   // Share
   $('share-link').addEventListener('click', function () { copy(location.href, '청첩장 주소를'); });
+})();
+</script>
+<script>
+// Cover intro (A): names rise → "We're getting married" types → photo unveils → date & hall type
+(function () {
+  var cov = document.querySelector('.cover.editorial');
+  if (!cov || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var t1 = cov.querySelector('.t1'), ph = cov.querySelector('.ph'), hint = cov.querySelector('.scroll-hint');
+  var lines = ['.t2', '.when', '.hall'].map(function (q) { return cov.querySelector(q); }).filter(Boolean);
+  var timers = [], done = false;
+  cov.classList.add('intro');
+  var tw = lines.map(function (el) {
+    var text = el.textContent, on = document.createElement('span'), off = document.createElement('span'), caret = document.createElement('i');
+    el.setAttribute('aria-label', text);
+    on.setAttribute('aria-hidden', 'true'); off.setAttribute('aria-hidden', 'true');
+    off.className = 'tw-off'; off.textContent = text; caret.className = 'tw-caret';
+    el.textContent = ''; el.appendChild(on); el.appendChild(off);
+    return { el: el, text: text, on: on, off: off, caret: caret };
+  });
+  function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+  function type(t, start, speed, keepCaret) {
+    later(function () { t.el.insertBefore(t.caret, t.off); }, start);
+    for (var n = 1; n <= t.text.length; n++) (function (n) {
+      later(function () { t.on.textContent = t.text.slice(0, n); t.off.textContent = t.text.slice(n); }, start + n * speed);
+    })(n);
+    later(function () { if (!keepCaret) t.caret.remove(); }, start + t.text.length * speed + (keepCaret ? 0 : 60));
+    return start + t.text.length * speed;
+  }
+  function finish() {
+    if (done) return; done = true;
+    timers.forEach(clearTimeout);
+    tw.forEach(function (t) { t.el.textContent = t.text; t.el.removeAttribute('aria-label'); });
+    cov.classList.remove('intro');
+    ['scroll', 'touchstart', 'pointerdown', 'keydown'].forEach(function (ev) { removeEventListener(ev, finish); });
+  }
+  later(function () { t1.classList.add('show'); }, 80);
+  var end = 700;
+  if (tw[0]) end = type(tw[0], 700, 38);
+  later(function () { ph.classList.add('show'); }, 1200);
+  var next = Math.max(end, 2200) + 120;
+  for (var i = 1; i < tw.length; i++) next = type(tw[i], next, 34, i === tw.length - 1) + 160;
+  later(function () { hint && hint.classList.add('show'); }, next + 200);
+  later(finish, next + 1600);
+  ['scroll', 'touchstart', 'pointerdown', 'keydown'].forEach(function (ev) { addEventListener(ev, finish, { passive: true }); });
 })();
 </script>
 </body>
