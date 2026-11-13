@@ -534,6 +534,27 @@ section.tint.soft .acc-panel .copy:active { background: var(--ink); border-color
 .vline { display: block; width: 1px; height: 48px; margin: 0 auto; background: #c8c8c8; }
 /* Map blends with its own paper texture, so the fade-in looks the same from start to end */
 .sketch { isolation: isolate; background: var(--paper-tex), var(--ground); }
+/* Location grouping: [address · map · buttons] tight, then [transit] as a quiet two-column list */
+.sketch { margin-top: 20px; }
+.navs, .sketch + .map[hidden] + .navs, .map[hidden] + .navs { margin-top: 6px; }
+.navs + .ways { margin-top: 44px; }
+.ways { gap: 16px; }
+.way, .way:first-child, .way:last-child { display: grid; grid-template-columns: 76px 1fr; align-items: center; padding: 0; border-top: 0; }
+.way h3 { margin: 0; font-size: 14px; }
+.way p { font-size: 14px; }
+section[aria-labelledby="t-way"].before-tint .way:last-child { padding-bottom: 0; }
+.line, .line.l3, .line.lsb { background: none; color: var(--ink); border: 1px solid var(--ink); height: 18px; font-weight: 600; }
+.line.l3 { min-width: 18px; }
+/* Nav buttons: text only */
+.navs svg { display: none; }
+.navs a { font-size: 13.5px; }
+/* Nav buttons square; map drawing (x 112–1885 of 2000) aligned to the content edges like buttons & transit list */
+.navs a { border-radius: 0; }
+.sketch { width: calc(100% * 2000 / 1773); max-width: none; margin-left: calc(-100% * 112 / 1773); margin-right: 0; }
+/* Nav buttons share the Account block gray */
+.navs a { background: #efefef; }
+.navs a:hover { background: #e8e8e8; }
+.navs a:active { background: #e2e2e2; }
 </style>
 </head>
 <body>
@@ -606,7 +627,7 @@ section.tint.soft .acc-panel .copy:active { background: var(--ink); border-color
     <h2 class="title" id="t-way"><span class="en">Location</span><span class="kr">오시는 길</span></h2>
     <p class="venue-addr">서울 서초구 강남대로 213<span class="venue-hall">엘타워 6층 그레이스홀</span></p>
     <button class="sketch" type="button" id="sketch-btn" aria-label="약도 크게 보기">
-      <img src="photos/map.jpg?v=8" alt="약도: 양재역 9번 출구 근처 엘타워. 위쪽 도곡동, 아래쪽 사당동, 왼쪽 강남역, 오른쪽 성남 방향. 주변에 서초구청, 서초문화예술회관" width="2000" height="824" loading="lazy">
+      <img src="photos/map.jpg?v=10" alt="약도: 양재역 9번 출구 옆 엘타워. 위쪽 도곡동, 아래쪽 사당동, 왼쪽 강남역, 오른쪽 성남 방향. 주변에 서초구청, 서초문화예술회관" width="2000" height="824" loading="lazy">
     </button>
     <div class="map" id="naver-map" role="img" aria-label="엘타워 양재 위치 지도" hidden></div>
     <div class="navs">
@@ -915,7 +936,7 @@ var CONFIG = {
   stage.addEventListener('touchend', function (e) { if (tx === null) return; var dx = e.changedTouches[0].clientX - tx; tx = null; if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1); });
 
   // Sketch map opens full screen
-  $('sketch-btn').addEventListener('click', function () { openViewer(['photos/map.jpg?v=8'], 0, [true]); });
+  $('sketch-btn').addEventListener('click', function () { openViewer(['photos/map.jpg?v=10'], 0, [true]); });
 
   // Naver map (shown only when NAVER_MAP_KEY is set)
   if (CONFIG.NAVER_MAP_KEY) {
