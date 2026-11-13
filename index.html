@@ -555,6 +555,21 @@ section[aria-labelledby="t-way"].before-tint .way:last-child { padding-bottom: 0
 .navs a { background: #efefef; }
 .navs a:hover { background: #e8e8e8; }
 .navs a:active { background: #e2e2e2; }
+
+/* Calendar tighten + mono numerals, no bold in date */
+.cal-card { padding: 0 54px; }
+.cal { font-family: var(--mono); font-size: 14px; padding-block: 14px; }
+.cal .d { line-height: 1.9; }
+.cal .on span { width: 1.95em; height: 1.95em; }
+.cal-date, .cal-date span { font-weight: 400; }
+section.tint .dday { margin-top: 26px; font-family: var(--mono); font-size: 16px; letter-spacing: .04em; }
+
+/* Month label on top, date line moved under the calendar */
+.cal-month { margin: 0 0 18px; font-family: var(--mono); font-size: 15px; letter-spacing: .24em; text-transform: uppercase; color: #fff; }
+.cal-card .cal-date { margin: 30px 0 0; }
+section.tint .cal-card .dday { margin-top: 8px; }
+
+.venue-addr { font-size: 15px; font-weight: 400; }
 </style>
 </head>
 <body>
@@ -601,9 +616,10 @@ section[aria-labelledby="t-way"].before-tint .way:last-child { padding-bottom: 0
   <section class="wrap tint" aria-labelledby="t-date">
     <h2 class="title" id="t-date"><span class="en">Wedding Day</span><span class="kr">예식 일시</span></h2>
     <div class="cal-card">
-      <p class="cal-date">2027년 3월 6일<span>토요일 12시</span></p>
+      <p class="cal-month" aria-hidden="true">March</p>
       <div class="cal" id="cal" aria-label="2027년 3월 달력, 6일 예식"></div>
       <div class="count" id="count" aria-hidden="true"></div>
+      <p class="cal-date">2027년 3월 6일<span>토요일 12시</span></p>
       <p class="dday" id="dday" aria-live="polite"></p>
     </div>
   </section>
