@@ -532,6 +532,8 @@ section.tint.soft .acc-panel .copy:active { background: var(--ink); border-color
 .cover.editorial .scroll-hint { bottom: 12px; }
 /* Vertical line between sections (echoes the cover scroll hint) */
 .vline { display: block; width: 1px; height: 48px; margin: 0 auto; background: #c8c8c8; }
+/* Map blends with its own paper texture, so the fade-in looks the same from start to end */
+.sketch { isolation: isolate; background: var(--paper-tex), var(--ground); }
 </style>
 </head>
 <body>
