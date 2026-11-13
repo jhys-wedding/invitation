@@ -530,6 +530,8 @@ section.tint.soft .acc-panel .copy:active { background: var(--ink); border-color
 .cover.editorial .ph { width: min(62%, max(150px, calc((var(--cover-h, 100svh) - 370px) * 0.8))); margin-top: clamp(20px, 4svh, 34px); }
 .cover.editorial .cover-title .t1 { font-size: min(40px, 10.4vw); }
 .cover.editorial .scroll-hint { bottom: 12px; }
+/* Vertical line between sections (echoes the cover scroll hint) */
+.vline { display: block; width: 1px; height: 48px; margin: 0 auto; background: #c8c8c8; }
 </style>
 </head>
 <body>
@@ -596,7 +598,7 @@ section.tint.soft .acc-panel .copy:active { background: var(--ink); border-color
     </div>
   </section>
 
-  <hr class="divider" aria-hidden="true">
+  <span class="vline" aria-hidden="true"></span>
 
   <section class="wrap" aria-labelledby="t-way">
     <h2 class="title" id="t-way"><span class="en">Location</span><span class="kr">오시는 길</span></h2>
@@ -1074,7 +1076,7 @@ var CONFIG = {
   // Scroll reveal: content is visible by default; hiding only starts once the observer is ready
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if ('IntersectionObserver' in window && !reduce) {
-    var targets = document.querySelectorAll('section .title, section .body-text, .parents, .contact-row, .cal-card, .join-grid, .join .ph, .pb-nav, .venue-name, .navs, .ways, .gb-track, .gb-actions, .rsvp-card, #accounts, .ending .ph, .ending-title, .quote');
+    var targets = document.querySelectorAll('section .title, section .body-text, .parents, .contact-row, .cal-card, .join-grid, .join .ph, .pb-nav, .venue-name, .venue-addr, .sketch, .navs, .ways, .gb-track, .gb-actions, .rsvp-card, .acc-intro, #accounts, .ending .ph, .ending-title, .quote');
     var io = new IntersectionObserver(function (list) {
       list.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
