@@ -35,16 +35,17 @@
   --grotesk: "Inter", "Helvetica Neue", Arial, sans-serif;
   --ui: "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", sans-serif;
   --script: "Mrs Saint Delafield", cursive;
+  --paper-tex: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35  0 0 0 0 0.32  0 0 0 0 0.28  0 0 0 0.16 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   --title-sub: "Cormorant Garamond", "Times New Roman", serif;
   color-scheme: light;
 }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
-html { background: #ffffff; -webkit-text-size-adjust: 100%; }
+html { background: var(--paper-tex), #ffffff; -webkit-text-size-adjust: 100%; }
 body {
   font-variant-numeric: lining-nums;
   margin: 0;
-  background: #ffffff;
+  background: var(--paper-tex), #ffffff;
   color: var(--text);
   font-family: var(--kr);
   font-size: 14px;
@@ -57,7 +58,7 @@ body {
 button { font: inherit; color: inherit; cursor: pointer; }
 a { color: inherit; }
 
-.page { max-width: 430px; margin: 0 auto; background: var(--ground); min-height: 100vh; overflow: hidden; }
+.page { max-width: 430px; margin: 0 auto; background: var(--paper-tex), var(--ground); min-height: 100vh; overflow: hidden; }
 .wrap {
   padding-left: max(28px, env(safe-area-inset-left, 0px));
   padding-right: max(28px, env(safe-area-inset-right, 0px));
@@ -127,7 +128,7 @@ a { color: inherit; }
 .pill.dark svg { color: #fff; }
 
 /* Framed cover: photo as a cropped print on white, text below it */
-.cover.framed { height: auto; min-height: 0; display: flex; flex-direction: column; align-items: center; padding: 13vh 0 84px; background: #fff; overflow: visible; --zoom: 1; }
+.cover.framed { height: auto; min-height: 0; display: flex; flex-direction: column; align-items: center; padding: 13vh 0 84px; background: transparent; overflow: visible; --zoom: 1; }
 .cover.framed::after { display: none; }
 .cover.framed .ph { position: relative; inset: auto; width: 66%; aspect-ratio: 1.15; overflow: hidden; background: #eee; }
 .cover.framed .ph > img { object-position: 50% 40%; transform: scale(var(--zoom)); transform-origin: 50% 35%; }
@@ -138,7 +139,7 @@ a { color: inherit; }
 .cover.framed .cover-info { position: static; width: 66%; margin-top: 48px; text-align: right; }
 .cover.framed .scroll-hint { background: rgba(26, 26, 26, 0.15); }
 /* Section frame */
-section.tint { background: #f9f9f9; padding-block: 72px; }
+section.tint { background: var(--paper-tex), #f9f9f9; padding-block: 72px; }
 section { padding-block: 56px; text-align: center; }
 /* Spacing rule: white|white = 56px + line + 56px, white|gray = 72px each side, no line */
 .tint + section { padding-top: 72px; }
@@ -205,11 +206,11 @@ section:has(+ .tint) { padding-bottom: 72px; }
 .venue-addr { margin: 0; }
 .venue-tel { margin: 2px 0 0; font-family: var(--en); font-size: 15px; }
 .sketch { display: block; width: calc(100% + 56px); max-width: none; margin: 28px -28px 0; padding: 0; border: 0; background: none; cursor: zoom-in; }
-.sketch img { display: block; width: 100%; height: auto; }
+.sketch img { display: block; width: 100%; height: auto; mix-blend-mode: multiply; }
 .sketch + .map[hidden] + .navs { margin-top: 0; }
 .map { height: 300px; margin: 28px -28px 0; background: var(--paper); }
 .map[hidden] + .navs { margin-top: 28px; }
-.navs { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0 -28px; border-top: 1px solid var(--line); background: var(--paper); border-bottom: 1px solid var(--line); }
+.navs { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0 -28px; border-top: 1px solid var(--line); background: transparent; border-bottom: 1px solid var(--line); }
 .navs a { display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 52px; font-family: var(--ui); font-size: 13px; color: var(--ink); text-decoration: none; }
 .navs a + a { border-left: 1px solid var(--line); }
 .navs a:hover { background: #f5f5f5; }
@@ -273,7 +274,7 @@ section[aria-labelledby="t-way"] { padding-bottom: 0; }
 .quote { margin: 20px 0 0; font-size: 15px; line-height: 2.1; color: var(--text); }
 .quote cite { display: block; margin-top: 14px; font-style: normal; font-size: 13px; color: var(--muted); }
 
-footer { padding-block: 32px calc(36px + env(safe-area-inset-bottom, 0px)); background: var(--paper); text-align: center; display: grid; gap: 10px; justify-items: center; }
+footer { padding-block: 32px calc(36px + env(safe-area-inset-bottom, 0px)); background: transparent; text-align: center; display: grid; gap: 10px; justify-items: center; }
 footer .row { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
 footer .credit { margin: 14px 0 0; font-family: var(--en); font-size: 11px; letter-spacing: 0.02em; color: var(--muted); }
 footer .credit a { color: inherit; white-space: nowrap; }
@@ -445,7 +446,7 @@ textarea.field { min-height: 120px; resize: vertical; line-height: 1.6; }
     <h2 class="title" id="t-way"><span class="en">Location</span><span class="kr">오시는 길</span></h2>
     <p class="venue-addr">서울 서초구 강남대로 213 엘타워 양재</p>
     <button class="sketch" type="button" id="sketch-btn" aria-label="약도 크게 보기">
-      <img src="photos/map.jpg?v=6" alt="약도: 양재역 9번 출구 근처 엘타워. 위쪽 도곡동, 아래쪽 사당동, 왼쪽 강남역, 오른쪽 성남 방향. 주변에 서초구청, 서초문화예술회관" width="2000" height="786" loading="lazy">
+      <img src="photos/map.jpg?v=8" alt="약도: 양재역 9번 출구 근처 엘타워. 위쪽 도곡동, 아래쪽 사당동, 왼쪽 강남역, 오른쪽 성남 방향. 주변에 서초구청, 서초문화예술회관" width="2000" height="824" loading="lazy">
     </button>
     <div class="map" id="naver-map" role="img" aria-label="엘타워 양재 위치 지도" hidden></div>
     <div class="navs">
@@ -564,6 +565,8 @@ textarea.field { min-height: 120px; resize: vertical; line-height: 1.6; }
 /* ===== 설정: 실제 정보로 바꾸는 곳 ===== */
 var CONFIG = {
   // Google Apps Script 웹 앱 URL (참석 회신·방명록 저장). 비워 두면 예시 모드.
+  // 방명록 표시 여부. 다시 보이게 하려면 true 로 바꾸기
+  SHOW_GUESTBOOK: false,
   ENDPOINT: 'https://script.google.com/macros/s/AKfycbyUna-YtzFDk7DtZOmTm7d2AmH4hFId43NsYd8Ws3txq4TaMkSqIRw-gUtPy3ZvN6mgTA/exec',
   // 네이버 클라우드 플랫폼 Maps Client ID. 비워 두면 지도 칸 숨김
   NAVER_MAP_KEY: '',
@@ -627,7 +630,10 @@ var CONFIG = {
   var hasAcc = CONFIG.ACCOUNTS.some(function (g) { return g.people.some(function (p) { return p.num; }); });
   $('contact-row').hidden = !hasTel;
   $('sec-acc').hidden = !hasAcc;
-  $('sec-gb').hidden = !CONFIG.ENDPOINT;
+  $('sec-gb').hidden = !CONFIG.ENDPOINT || !CONFIG.SHOW_GUESTBOOK;
+  // the divider after the guestbook goes with it, so two lines never stack
+  var gbLine = $('sec-gb').nextElementSibling;
+  if (gbLine && gbLine.classList.contains('divider')) gbLine.hidden = $('sec-gb').hidden;
   var fab = $('fab-rsvp');
   fab.hidden = !CONFIG.ENDPOINT;
   // Show the floating button once the cover has scrolled away, hide it at the footer and while a sheet is open
@@ -711,7 +717,7 @@ var CONFIG = {
   stage.addEventListener('touchend', function (e) { if (tx === null) return; var dx = e.changedTouches[0].clientX - tx; tx = null; if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1); });
 
   // Sketch map opens full screen
-  $('sketch-btn').addEventListener('click', function () { openViewer(['photos/map.jpg?v=6'], 0, [true]); });
+  $('sketch-btn').addEventListener('click', function () { openViewer(['photos/map.jpg?v=8'], 0, [true]); });
 
   // Naver map (shown only when NAVER_MAP_KEY is set)
   if (CONFIG.NAVER_MAP_KEY) {
