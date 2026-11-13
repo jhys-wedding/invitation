@@ -525,6 +525,11 @@ section.tint.soft .acc-panel .copy:active { background: var(--ink); border-color
 .tw-off { visibility: hidden; }
 .tw-caret { display: inline-block; width: 0; height: 1em; margin-right: -1px; border-right: 1px solid currentColor; vertical-align: -0.12em; animation: twBlink 0.9s steps(1) infinite; }
 @keyframes twBlink { 50% { opacity: 0; } }
+/* Cover fits one screen (incl. in-app browsers like KakaoTalk): content centered, hint pinned to bottom */
+.cover.editorial { height: var(--cover-h, 100svh); min-height: 480px; max-height: 920px; padding: 8px 0 clamp(56px, 12svh, 110px); justify-content: center; box-sizing: border-box; overflow: hidden; }
+.cover.editorial .ph { width: min(62%, max(150px, calc((var(--cover-h, 100svh) - 370px) * 0.8))); margin-top: clamp(20px, 4svh, 34px); }
+.cover.editorial .cover-title .t1 { font-size: min(40px, 10.4vw); }
+.cover.editorial .scroll-hint { bottom: 12px; }
 </style>
 </head>
 <body>
