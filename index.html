@@ -570,6 +570,11 @@ section.tint .dday { margin-top: 26px; font-family: var(--mono); font-size: 16px
 section.tint .cal-card .dday { margin-top: 8px; }
 
 .venue-addr { font-size: 15px; font-weight: 400; }
+
+/* Narrower column for Location + Account, matched to map image width */
+section[aria-labelledby="t-way"] > :not(.title), #sec-acc > :not(.title) { width: 100%; max-width: 310px; margin-left: auto; margin-right: auto; }
+section[aria-labelledby="t-way"] .sketch { width: 100%; margin-left: auto; margin-right: auto; }
+section[aria-labelledby="t-way"] .sketch + .map[hidden] + .navs { margin-left: auto; margin-right: auto; }
 </style>
 </head>
 <body>
@@ -643,7 +648,7 @@ section.tint .cal-card .dday { margin-top: 8px; }
     <h2 class="title" id="t-way"><span class="en">Location</span><span class="kr">오시는 길</span></h2>
     <p class="venue-addr">서울 서초구 강남대로 213<span class="venue-hall">엘타워 6층 그레이스홀</span></p>
     <button class="sketch" type="button" id="sketch-btn" aria-label="약도 크게 보기">
-      <img src="photos/map.jpg?v=10" alt="약도: 양재역 9번 출구 옆 엘타워. 위쪽 도곡동, 아래쪽 사당동, 왼쪽 강남역, 오른쪽 성남 방향. 주변에 서초구청, 서초문화예술회관" width="2000" height="824" loading="lazy">
+      <img src="photos/map.jpg?v=12" alt="약도: 양재역 9번 출구 옆 엘타워. 위쪽 도곡동, 아래쪽 사당동, 왼쪽 강남역, 오른쪽 성남 방향. 주변에 서초구청, 서초문화예술회관" width="1581" height="824" loading="lazy">
     </button>
     <div class="map" id="naver-map" role="img" aria-label="엘타워 양재 위치 지도" hidden></div>
     <div class="navs">
@@ -671,7 +676,6 @@ section.tint .cal-card .dday { margin-top: 8px; }
 
   <section class="wrap tint soft" aria-labelledby="t-acc" id="sec-acc">
     <h2 class="title" id="t-acc"><span class="en">Account</span><span class="kr">마음 전하실 곳</span></h2>
-    <p class="acc-intro">참석이 어려우신 분들을 위해 기재하였습니다.<br>너그러운 마음으로 양해 부탁드립니다.</p>
     <div id="accounts"></div>
   </section>
 
@@ -952,7 +956,7 @@ var CONFIG = {
   stage.addEventListener('touchend', function (e) { if (tx === null) return; var dx = e.changedTouches[0].clientX - tx; tx = null; if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1); });
 
   // Sketch map opens full screen
-  $('sketch-btn').addEventListener('click', function () { openViewer(['photos/map.jpg?v=10'], 0, [true]); });
+  $('sketch-btn').addEventListener('click', function () { openViewer(['photos/map.jpg?v=12'], 0, [true]); });
 
   // Naver map (shown only when NAVER_MAP_KEY is set)
   if (CONFIG.NAVER_MAP_KEY) {
