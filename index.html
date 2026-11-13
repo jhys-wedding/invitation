@@ -583,6 +583,11 @@ section[aria-labelledby="t-way"] .sketch + .map[hidden] + .navs { margin-left: a
 .cover.editorial .ph > img { object-position: 50% 50%; }
 .ending .ph { aspect-ratio: 1; }
 .ending .ph > img { object-position: 50% 22%; }
+
+/* Section vline animates like the cover scroll hint */
+.vline { position: relative; overflow: hidden; background: rgba(26, 26, 26, 0.15); }
+.vline::after { content: ""; position: absolute; left: 0; top: 0; width: 1px; height: 100%; background: var(--ink); animation: barDown 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+@media (prefers-reduced-motion: reduce) { .vline::after { animation: none; transform: none; } }
 </style>
 </head>
 <body>
