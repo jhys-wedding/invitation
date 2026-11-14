@@ -621,6 +621,10 @@ section[aria-labelledby="t-way"] .sketch + .map[hidden] + .navs { margin-left: a
 /* Body copy in serif (matches paper invitation); UI stays sans */
 .body-text, .way, .way h3, .quote { font-family: var(--kr); }
 .body-text, .quote { color: #3a3a3a; }
+
+.v-btn, .v-btn:focus, .v-btn:focus-visible, .viewer:focus { outline: none !important; }
+
+.v-bar { padding-right: max(5px, env(safe-area-inset-right, 0px)); }
 </style>
 </head>
 <body>
@@ -633,11 +637,11 @@ section[aria-labelledby="t-way"] .sketch + .map[hidden] + .navs { margin-left: a
   </button>
   <header class="cover light framed editorial">
     <div class="cover-title"><p class="t1">Jae Hyeong<span class="amp">&amp;</span>Ye Sol</p><p class="t2">We're getting married</p></div>
-    <div class="ph"><span class="ph-label">메인 사진 자리 · photos/cover.jpg</span><img src="photos/cover.jpg?v=2" alt="재형과 예솔" onerror="this.remove()"></div>
+    <div class="ph"><span class="ph-label">메인 사진 자리 · photos/cover.jpg</span><img src="photos/cover.jpg?v=3" alt="재형과 예솔" onerror="this.remove()"></div>
     <div class="cover-info">
       <h1 class="sr-only">재형 &amp; 예솔</h1>
-      <p class="when">2027.3.6.SAT. 12:00 pm</p>
-      <p class="hall">EL TOWER 6F, Grace Hall</p>
+      <p class="when">2027.3.6.SAT. 12:00 PM</p>
+      <p class="hall">EL TOWER 6F, GRACE HALL</p>
     </div>
     <span class="scroll-hint" aria-hidden="true"></span>
   </header>
@@ -690,7 +694,7 @@ section[aria-labelledby="t-way"] .sketch + .map[hidden] + .navs { margin-left: a
 
   <section class="wrap" aria-labelledby="t-way">
     <h2 class="title" id="t-way"><span class="en">Location</span><span class="kr">오시는 길</span></h2>
-    <p class="venue-addr">서울 서초구 강남대로 213<span class="venue-hall">엘타워 6층 그레이스홀</span></p>
+    <p class="venue-addr">서울 서초구 강남대로 213<span class="venue-hall">엘타워 6층, 그레이스홀</span></p>
     <button class="sketch" type="button" id="sketch-btn" aria-label="약도 크게 보기">
       <img src="photos/map.jpg?v=15" alt="약도: 양재역 9번 출구 옆 엘타워. 위쪽 도곡동, 아래쪽 사당동, 왼쪽 강남역, 오른쪽 성남 방향. 주변에 서초구청, 서초문화예술회관" width="2444" height="1421" loading="lazy">
     </button>
@@ -995,7 +999,7 @@ var CONFIG = {
     vCount.textContent = vList.length > 1 ? (cur + 1) + ' / ' + vList.length : '약도';
     $('v-prev').disabled = cur === 0; $('v-next').disabled = cur === vList.length - 1;
   }
-  function openViewer(list, i, ld) { vList = list; vLoaded = ld; cur = i; renderViewer(); open(viewer); }
+  function openViewer(list, i, ld) { vList = list; vLoaded = ld; cur = i; renderViewer(); open(viewer); viewer.setAttribute('tabindex', '-1'); viewer.focus({ preventScroll: true }); }
   function step(dir) { if (vList.length < 2) return; go(cur + dir); }
   $('v-prev').addEventListener('click', function () { step(-1); });
   $('v-next').addEventListener('click', function () { step(1); });
