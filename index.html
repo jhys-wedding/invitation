@@ -599,6 +599,20 @@ section[aria-labelledby="t-way"] .sketch + .map[hidden] + .navs { margin-left: a
 /* No zoom / no save in photo viewer + album */
 .viewer, .v-stage { touch-action: none; }
 .viewer img, .pbook img { -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; -webkit-user-drag: none; }
+
+/* Viewer slider */
+.v-stage { display: block; position: relative; overflow: hidden; }
+.v-track { display: flex; width: 100%; height: 100%; transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1); will-change: transform; }
+.v-slide { flex: 0 0 100%; min-width: 0; height: 100%; display: grid; place-items: center; }
+.v-slide img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.v-btn:disabled { opacity: 0.25; }
+
+/* Viewer fits a mobile-width column on PC; images never overflow */
+.v-bar, .v-stage, .v-nav { width: 100%; max-width: 430px; margin-inline: auto; box-sizing: border-box; }
+.v-stage { position: relative; }
+.v-track { position: absolute; inset: 0; height: auto; }
+.v-slide { display: flex; align-items: center; justify-content: center; }
+.v-slide img { max-width: 100%; max-height: 100%; width: auto; height: auto; }
 </style>
 </head>
 <body>
@@ -952,22 +966,52 @@ var CONFIG = {
   showPage(0);
   var viewer = $('viewer'), stage = $('v-stage'), vCount = $('v-count');
   var vList = [], vLoaded = [], cur = 0;
+  var track = null;
   function renderViewer() {
     stage.textContent = '';
-    if (vLoaded[cur]) { var img = el('img'); img.draggable = false; img.src = vList[cur]; img.alt = '사진 ' + (cur + 1); stage.appendChild(img); }
-    else stage.appendChild(el('div', 'v-ph', vList.length > 1 ? '사진 ' + (cur + 1) + ' 자리' : '약도 이미지 자리 · photos/map.jpg'));
-    vCount.textContent = vList.length > 1 ? (cur + 1) + ' / ' + vList.length : '약도';
+    track = el('div', 'v-track');
+    vList.forEach(function (src, i) {
+      var sl = el('div', 'v-slide');
+      if (vLoaded[i]) { var img = el('img'); img.draggable = false; img.decoding = 'async'; img.src = src; img.alt = '사진 ' + (i + 1); sl.appendChild(img); }
+      else sl.appendChild(el('div', 'v-ph', vList.length > 1 ? '사진 ' + (i + 1) + ' 자리' : '약도 이미지 자리 · photos/map.jpg'));
+      track.appendChild(sl);
+    });
+    stage.appendChild(track);
     $('v-nav').style.visibility = vList.length > 1 ? 'visible' : 'hidden';
+    go(cur, false);
+  }
+  function go(n, anim) {
+    cur = Math.max(0, Math.min(vList.length - 1, n));
+    track.style.transition = anim === false ? 'none' : '';
+    track.style.transform = 'translateX(' + (-cur * 100) + '%)';
+    vCount.textContent = vList.length > 1 ? (cur + 1) + ' / ' + vList.length : '약도';
+    $('v-prev').disabled = cur === 0; $('v-next').disabled = cur === vList.length - 1;
   }
   function openViewer(list, i, ld) { vList = list; vLoaded = ld; cur = i; renderViewer(); open(viewer); }
-  function step(dir) { if (vList.length < 2) return; cur = (cur + dir + vList.length) % vList.length; renderViewer(); }
+  function step(dir) { if (vList.length < 2) return; go(cur + dir); }
   $('v-prev').addEventListener('click', function () { step(-1); });
   $('v-next').addEventListener('click', function () { step(1); });
   $('v-close').addEventListener('click', function () { close(viewer); });
   viewer.addEventListener('keydown', function (e) { if (e.key === 'ArrowLeft') step(-1); if (e.key === 'ArrowRight') step(1); });
-  var tx = null;
-  stage.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; }, { passive: true });
-  stage.addEventListener('touchend', function (e) { if (tx === null) return; var dx = e.changedTouches[0].clientX - tx; tx = null; if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1); });
+  // 손가락을 따라 밀리고, 놓으면 부드럽게 다음 사진으로
+  var sx = null, sy = 0, dx = 0, drag = false, sw = 1;
+  stage.addEventListener('touchstart', function (e) {
+    if (e.touches.length > 1 || vList.length < 2) { sx = null; return; }
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY; dx = 0; drag = false; sw = stage.clientWidth || 1;
+    track.style.transition = 'none';
+  }, { passive: true });
+  stage.addEventListener('touchmove', function (e) {
+    if (sx === null || e.touches.length > 1) return;
+    dx = e.touches[0].clientX - sx; var dy = e.touches[0].clientY - sy;
+    if (!drag && Math.abs(dx) > 6 && Math.abs(dx) > Math.abs(dy)) drag = true;
+    if (!drag) return;
+    var edge = (cur === 0 && dx > 0) || (cur === vList.length - 1 && dx < 0);
+    track.style.transform = 'translateX(calc(' + (-cur * 100) + '% + ' + (edge ? dx * 0.3 : dx) + 'px))';
+  }, { passive: true });
+  stage.addEventListener('touchend', function () {
+    if (sx === null) return; sx = null;
+    if (drag && Math.abs(dx) > sw * 0.18) go(cur + (dx < 0 ? 1 : -1)); else go(cur);
+  });
 
   // 사진 보기: 확대 제스처·길게 눌러 저장 막기
   function vOpen() { return viewer.hasAttribute('open'); }
