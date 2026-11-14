@@ -613,6 +613,14 @@ section[aria-labelledby="t-way"] .sketch + .map[hidden] + .navs { margin-left: a
 .v-track { position: absolute; inset: 0; height: auto; }
 .v-slide { display: flex; align-items: center; justify-content: center; }
 .v-slide img { max-width: 100%; max-height: 100%; width: auto; height: auto; }
+
+/* Viewer buttons: no round frame */
+.v-btn, .v-btn:hover, .v-btn:active { background: none; border-radius: 0; box-shadow: none; }
+.v-btn:focus:not(:focus-visible) { outline: none; }
+
+/* Body copy in serif (matches paper invitation); UI stays sans */
+.body-text, .way, .way h3, .quote { font-family: var(--kr); }
+.body-text, .quote { color: #3a3a3a; }
 </style>
 </head>
 <body>
