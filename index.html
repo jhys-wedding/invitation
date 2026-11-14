@@ -590,6 +590,15 @@ section[aria-labelledby="t-way"] .sketch + .map[hidden] + .navs { margin-left: a
 @media (prefers-reduced-motion: reduce) { .vline::after { animation: none; transform: none; } }
 
 .parents .rel, .parents span:last-child { text-align: left; }
+
+/* Album: plain 3x3 grid, paging kept */
+.pb-pages { margin-inline: 0; }
+.pb-page.on { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+.pb-item { position: relative; padding: 0; background: #e8e8e8; box-shadow: none; aspect-ratio: 1; transform: none; overflow: hidden; }
+@keyframes pbUp { from { opacity: 0; transform: translateY(32px); } to { opacity: 1; transform: none; } }
+/* No zoom / no save in photo viewer + album */
+.viewer, .v-stage { touch-action: none; }
+.viewer img, .pbook img { -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; -webkit-user-drag: none; }
 </style>
 </head>
 <body>
@@ -902,24 +911,16 @@ var CONFIG = {
 
   // Gallery + viewer
   var loaded = [];
-  // 포토북: 한 페이지 6장, 좌우로 엇갈린 배치 (390px 기준 좌표, 행 높이 200)
-  var PB_SLOTS = [
-    { x: 46, y: 8, w: 118, ar: 3 / 4 }, { x: 200, y: 30, w: 150, ar: 4 / 3 },
-    { x: 52, y: 20, w: 112, ar: 1 }, { x: 222, y: 2, w: 116, ar: 3 / 4 },
-    { x: 32, y: 22, w: 148, ar: 4 / 3 }, { x: 224, y: 0, w: 116, ar: 3 / 4 }
-  ];
+  // 앨범: 한 페이지 3x3 (9장), 정사각형 그리드
   var pbPages = $('pb-pages'), pbDots = $('pb-dots'), pages = [], dots = [], pg = 0;
-  var perPage = PB_SLOTS.length, nPages = Math.ceil(CONFIG.PHOTOS.length / perPage);
+  var perPage = 9, nPages = Math.ceil(CONFIG.PHOTOS.length / perPage);
   for (var p = 0; p < nPages; p++) {
     var page = el('div', 'pb-page'), items = CONFIG.PHOTOS.slice(p * perPage, (p + 1) * perPage);
-    var rows = Math.ceil(items.length / 2), H = rows * 200 - 20;
-    page.style.aspectRatio = '390 / ' + H;
     items.forEach(function (src, k) {
-      var i = p * perPage + k, sl = PB_SLOTS[k];
-      if (k === items.length - 1 && k % 2 === 0) sl = { x: 120, y: 24, w: 150, ar: 4 / 3 }; // 한 줄에 혼자 남은 사진은 가운데
+      var i = p * perPage + k;
       var b = el('button', 'pb-item'); b.type = 'button'; b.setAttribute('aria-label', '사진 ' + (i + 1) + ' 크게 보기');
-      b.style.cssText = 'left:' + (sl.x / 3.9) + '%;top:' + ((Math.floor(k / 2) * 200 + sl.y) / H * 100) + '%;width:' + (sl.w / 3.9) + '%;aspect-ratio:' + sl.ar + ';--d:' + (k % 2) * 140 + 'ms';
-      var img = el('img'); img.alt = ''; img.loading = 'lazy'; img.decoding = 'async'; img.src = src.replace('photos/', 'photos/thumbs/');
+      b.style.setProperty('--d', (k % 3) * 110 + 'ms');
+      var img = el('img'); img.alt = ''; img.loading = 'lazy'; img.decoding = 'async'; img.draggable = false; img.src = src.replace('photos/', 'photos/thumbs/');
       img.onload = function () { loaded[i] = true; };
       b.appendChild(img); b.addEventListener('click', function () { openViewer(CONFIG.PHOTOS, i, loaded); });
       page.appendChild(b);
@@ -953,7 +954,7 @@ var CONFIG = {
   var vList = [], vLoaded = [], cur = 0;
   function renderViewer() {
     stage.textContent = '';
-    if (vLoaded[cur]) { var img = el('img'); img.src = vList[cur]; img.alt = '사진 ' + (cur + 1); stage.appendChild(img); }
+    if (vLoaded[cur]) { var img = el('img'); img.draggable = false; img.src = vList[cur]; img.alt = '사진 ' + (cur + 1); stage.appendChild(img); }
     else stage.appendChild(el('div', 'v-ph', vList.length > 1 ? '사진 ' + (cur + 1) + ' 자리' : '약도 이미지 자리 · photos/map.jpg'));
     vCount.textContent = vList.length > 1 ? (cur + 1) + ' / ' + vList.length : '약도';
     $('v-nav').style.visibility = vList.length > 1 ? 'visible' : 'hidden';
@@ -968,6 +969,13 @@ var CONFIG = {
   stage.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; }, { passive: true });
   stage.addEventListener('touchend', function (e) { if (tx === null) return; var dx = e.changedTouches[0].clientX - tx; tx = null; if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1); });
 
+  // 사진 보기: 확대 제스처·길게 눌러 저장 막기
+  function vOpen() { return viewer.hasAttribute('open'); }
+  ['gesturestart', 'gesturechange'].forEach(function (t) { document.addEventListener(t, function (e) { if (vOpen()) e.preventDefault(); }, { passive: false }); });
+  document.addEventListener('touchmove', function (e) { if (vOpen() && e.touches.length > 1) e.preventDefault(); }, { passive: false });
+  var lastTap = 0;
+  stage.addEventListener('touchend', function (e) { var t = Date.now(); if (t - lastTap < 320) e.preventDefault(); lastTap = t; }, { passive: false });
+  document.addEventListener('contextmenu', function (e) { if (e.target.closest && e.target.closest('.viewer, .pbook')) e.preventDefault(); });
   // Sketch map opens full screen
   $('sketch-btn').addEventListener('click', function () { openViewer(['photos/map.jpg?v=15'], 0, [true]); });
 
