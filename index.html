@@ -16,7 +16,7 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Marcellus&family=Courier+Prime&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Marcellus&family=Courier+Prime&family=Lora:ital@1&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 /* Layout: one 430px column on a blush-gray ground; each section centered, English title over Korean subtitle */
@@ -625,10 +625,69 @@ section[aria-labelledby="t-way"] .sketch + .map[hidden] + .navs { margin-left: a
 .v-btn, .v-btn:focus, .v-btn:focus-visible, .viewer:focus { outline: none !important; }
 
 .v-bar { padding-right: max(5px, env(safe-area-inset-right, 0px)); }
+
+/* Ampersand */
+.cover.editorial .cover-title .t1 .amp { font-family: "Lora", serif; font-style: italic; }
+/* Letter in an envelope: frame + pocket open up as you scroll; the pocket stays at the bottom */
+.lt { display: none; }
+html.lt-on .lt { display: block; }
+html.lt-on .page { padding-bottom: var(--lt-min, 56px); }
+.lt-frame, .lt-pocket { position: fixed; left: 50%; width: min(100%, 430px); transform: translateX(-50%); pointer-events: none; }
+.lt-frame { top: 0; bottom: 0; z-index: 14; box-sizing: border-box; border: 0 solid var(--env-c, #ececec); border-width: calc(var(--lt-k, 1) * 34px) calc(var(--lt-k, 1) * 16px) 0; }
+.lt-top { position: absolute; left: 0; right: 0; top: calc(var(--lt-k, 1) * -34px); height: 34px; display: grid; place-items: center; font-family: "Lora", serif; font-style: italic; font-size: 14px; color: #9a9a9a; opacity: var(--lt-k, 1); }
+.lt-pocket { bottom: 0; z-index: 15; height: var(--lt-h, 26svh); filter: drop-shadow(0 -2px 5px rgba(0, 0, 0, 0.07)); }
+.lt-pocket svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.lt-pocket polygon { fill: var(--env-c, #ececec); }
+.lt-seal { position: absolute; left: 50%; top: 62%; width: var(--lt-s, 62px); height: var(--lt-s, 62px); transform: translate(-50%, -62%); border-radius: 50%; background: var(--env-c, #ececec); display: grid; place-items: center; }
+.lt-seal span { display: grid; place-items: center; width: calc(100% - 12px); height: calc(100% - 12px); border-radius: 50%; border: 1px solid rgba(26, 26, 26, 0.10); font-family: "Lora", serif; font-style: italic; font-size: calc(var(--lt-s, 62px) * 0.22); color: #8e8e8e; }
+:root { --env-c: #ececec; }
+
+/* Pocket: two soft curves meeting at a point (drawn in px by JS) */
+.lt-pocket svg { overflow: visible; }
+.lt-pocket path { fill: var(--env-c, #ececec); }
+.lt-seal { top: var(--lt-d, 44px); transform: translate(-50%, -50%); }
+/* Cover photo: matted frame, outer edge = date line width */
+.cover.editorial .ph { width: 184px; box-shadow: 0 0 0 8px #fafafa, 0 0 3px 8px #d7d7d7; margin-top: calc(clamp(20px, 4svh, 34px) + 8px); margin-bottom: 8px; }
+
+/* Pocket edge: hairline instead of shadow, no seal */
+.lt-pocket { filter: none; }
+.lt-pocket .lt-edge { display: none; }
+
+.lt-msg { position: absolute; left: 0; right: 0; top: calc(46px + (100% - 46px) / 2); margin: 0; transform: translateY(-50%); text-align: center; font-family: "Lora", serif; font-style: italic; font-size: 14px; letter-spacing: .01em; color: #9a9a9a; opacity: var(--lt-k, 1); }
+
+/* Pocket: soft top-lit paper + blind-embossed inner border */
+.lt-pocket > svg > path:first-of-type { fill: url(#ltg); }
+.lt-emb path { fill: none; stroke-width: 1; }
+.lt-emb .hi { stroke: rgba(255, 255, 255, 0.95); }
+.lt-emb .lo { stroke: rgba(0, 0, 0, 0.07); }
+.cover.editorial .cover-info { margin-top: clamp(20px, 4svh, 34px); }
+section[aria-labelledby="t-way"] .way p { justify-content: flex-end; text-align: right; }
+
+/* Calendar: wedding day circled by pen instead of a filled dot */
+section.tint .cal .on span { position: relative; overflow: visible; background: none; color: #fff; }
+.pen-ring { position: absolute; left: 50%; top: 50%; width: 2.9em; height: 2.4em; transform: translate(-52%, -50%) rotate(-6deg); overflow: visible; pointer-events: none; }
+.pen-ring path { fill: none; stroke: #fff; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.drawn .pen-ring path { transition: stroke-dashoffset 0.9s cubic-bezier(0.45, 0, 0.25, 1) 0.2s; stroke-dashoffset: 0; }
+@media (prefers-reduced-motion: reduce) { .pen-ring path { stroke-dashoffset: 0; transition: none; } }
+
+
+/* Calendar rules: trim to the 일–토 glyph edges */
+.cal { border-top: 0; border-bottom: 0; background: linear-gradient(rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18)) 50% 0 / calc(100% * 6 / 7 + 0.79em) 1px no-repeat, linear-gradient(rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18)) 50% 100% / calc(100% * 6 / 7 + 0.79em) 1px no-repeat; }
+/* Ending photo: same matted frame as the cover */
+.ending .ph { width: 184px; box-shadow: 0 0 0 8px #fafafa, 0 0 3px 8px #d7d7d7; margin-top: calc(34px + 8px); }
+.ending > .wrap { margin-top: 44px; }
+.ending-title { font-size: min(40px, 10.4vw); }
 </style>
 </head>
 <body>
 <main class="page">
+  <div class="lt" aria-hidden="true">
+    <div class="lt-frame"><span class="lt-top">with love</span></div>
+    <div class="lt-pocket">
+      <svg class="lt-shape"><defs><linearGradient id="ltg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f2f2f2"/><stop offset="1" stop-color="#e6e6e6"/></linearGradient></defs><path/><g class="lt-emb"><path class="hi"/><path class="lo"/></g><path class="lt-edge"/></svg>
+      <p class="lt-msg">We'd love you to be there</p>
+    </div>
+  </div>
 
   <audio id="bgm" src="music/clairdelune.mp3" preload="none" loop></audio>
   <button class="bgm-btn" id="bgm-btn" type="button" aria-pressed="false" aria-label="배경음악 재생">
@@ -640,8 +699,8 @@ section[aria-labelledby="t-way"] .sketch + .map[hidden] + .navs { margin-left: a
     <div class="ph"><span class="ph-label">메인 사진 자리 · photos/cover.jpg</span><img src="photos/cover.jpg?v=3" alt="재형과 예솔" onerror="this.remove()"></div>
     <div class="cover-info">
       <h1 class="sr-only">재형 &amp; 예솔</h1>
-      <p class="when">2027.3.6.SAT. 12:00 PM</p>
-      <p class="hall">EL TOWER 6F, GRACE HALL</p>
+      <p class="when">2027.3.6.SAT · 12:00 PM</p>
+      <p class="hall">EL TOWER 6F · GRACE HALL</p>
     </div>
     <span class="scroll-hint" aria-hidden="true"></span>
   </header>
@@ -694,7 +753,7 @@ section[aria-labelledby="t-way"] .sketch + .map[hidden] + .navs { margin-left: a
 
   <section class="wrap" aria-labelledby="t-way">
     <h2 class="title" id="t-way"><span class="en">Location</span><span class="kr">오시는 길</span></h2>
-    <p class="venue-addr">서울 서초구 강남대로 213<span class="venue-hall">엘타워 6층, 그레이스홀</span></p>
+    <p class="venue-addr">서울 서초구 강남대로 213<span class="venue-hall">엘타워 6층 그레이스홀</span></p>
     <button class="sketch" type="button" id="sketch-btn" aria-label="약도 크게 보기">
       <img src="photos/map.jpg?v=15" alt="약도: 양재역 9번 출구 옆 엘타워. 위쪽 도곡동, 아래쪽 사당동, 왼쪽 강남역, 오른쪽 성남 방향. 주변에 서초구청, 서초문화예술회관" width="2444" height="1421" loading="lazy">
     </button>
@@ -923,6 +982,15 @@ var CONFIG = {
   for (var day = 1; day <= last; day++) {
     var c = el('div', 'd' + ((first + day - 1) % 7 === 0 ? ' sun' : '') + (day === W.getDate() ? ' on' : ''));
     c.appendChild(el('span', null, day)); cal.appendChild(c);
+  }
+  // Hand-drawn pen loop around the wedding day, drawn in when the calendar comes into view
+  var onDay = cal.querySelector('.on span');
+  if (onDay) {
+    onDay.insertAdjacentHTML('beforeend', '<svg class="pen-ring" viewBox="0 0 60 50" aria-hidden="true"><path pathLength="1" d="M13 39 C4 30 7 12 25 7 C42 3 57 11 55 25 C53 40 37 46 22 44 C16 43 10 39 8 34"/></svg>');
+    if ('IntersectionObserver' in window) {
+      var penIo = new IntersectionObserver(function (e) { if (e[0].isIntersecting) { onDay.classList.add('drawn'); penIo.disconnect(); } }, { threshold: 1 });
+      penIo.observe(onDay);
+    } else onDay.classList.add('drawn');
   }
   var count = $('count'), dday = $('dday');
   function tick() {
@@ -1242,6 +1310,55 @@ var CONFIG = {
 
   // Share
   $('share-link').addEventListener('click', function () { copy(location.href, '청첩장 주소를'); });
+})();
+</script>
+<script>
+// Letter in an envelope: the frame melts away and the pocket shrinks to a band as you scroll
+(function () {
+  var lt = document.querySelector('.lt'); if (!lt) return;
+  var root = document.documentElement; root.classList.add('lt-on');
+  var H = innerHeight, lastW = innerWidth, raf = 0, MIN = 76, RUN = 260;
+  var pocket = lt.querySelector('.lt-pocket'), svg = pocket.querySelector('svg'), path = svg.querySelector('path'), edge = svg.querySelector('.lt-edge'), embHi = svg.querySelector('.lt-emb .hi'), embLo = svg.querySelector('.lt-emb .lo');
+  // Pocket top-edge shapes (each starts at 0,? and ends at W,?)
+  var SHAPES = {
+    1: function (W, m, d) { return 'M0 0 C' + W * 0.26 + ' 0 ' + W * 0.42 + ' ' + d * 0.55 + ' ' + m + ' ' + d + ' C' + W * 0.58 + ' ' + d * 0.55 + ' ' + W * 0.74 + ' 0 ' + W + ' 0'; },
+    2: function (W, m, d) { var k = d / m, t = 26; return 'M0 0 L' + (m - t) + ' ' + k * (m - t) + ' Q' + m + ' ' + (d + 2) + ' ' + (m + t) + ' ' + k * (m - t) + ' L' + W + ' 0'; },
+    3: function (W, m, d) { return 'M0 0 C' + W * 0.28 + ' ' + d * 1.05 + ' ' + W * 0.72 + ' ' + d * 1.05 + ' ' + W + ' 0'; },
+    4: function (W, m, d) { var n = 8, r = W / (2 * n), p = 'M0 ' + r; for (var i = 0; i < n; i++) p += ' A' + r + ' ' + r + ' 0 0 1 ' + (2 * r * (i + 1)) + ' ' + r; return p; },
+    6: function (W, m, d) { return 'M0 ' + d * 0.5 + ' L' + W + ' ' + d * 0.5; },
+    7: function (W, m, d) { return 'M0 ' + d * 0.35 + ' L' + m + ' ' + d * 0.85 + ' L' + W + ' ' + d * 0.35; },
+    8: function (W, m, d) { var y = d * 0.4, r = 30; return 'M0 ' + y + ' L' + (m - r) + ' ' + y + ' A' + r + ' ' + r + ' 0 0 0 ' + (m + r) + ' ' + y + ' L' + W + ' ' + y; },
+    9: function (W, m, d) { return 'M0 ' + d * 0.15 + ' L' + W + ' ' + d * 0.95; },
+    5: function (W, m, d) { return 'M0 ' + d * 0.7 + ' C' + W * 0.06 + ' ' + (-d * 0.25) + ' ' + W * 0.42 + ' ' + (-d * 0.25) + ' ' + m + ' ' + d * 0.75 + ' C' + W * 0.58 + ' ' + (-d * 0.25) + ' ' + W * 0.94 + ' ' + (-d * 0.25) + ' ' + W + ' ' + d * 0.7; }
+  };
+  var SHAPE = +(new URLSearchParams(location.search).get('shape')) || 1;
+  function shape(h, d) {
+    var W = pocket.clientWidth, m = W / 2;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + h);
+    var curve = SHAPES[SHAPE](W, m, d);
+    path.setAttribute('d', curve + ' L' + W + ' ' + h + ' L0 ' + h + 'Z');
+    var g = 14, inner = 'M0 ' + (h + 40) + ' L' + SHAPES[SHAPE](W - 2 * g, m - g, d).slice(1) + ' L' + (W - 2 * g) + ' ' + (h + 40);
+    embHi.setAttribute('d', inner); embLo.setAttribute('d', inner);
+    embHi.setAttribute('transform', 'translate(' + g + ',' + (g + 1) + ')');
+    embLo.setAttribute('transform', 'translate(' + g + ',' + g + ')');
+    edge.setAttribute('d', curve);
+    root.style.setProperty('--lt-d', d + 'px');
+  }
+  function frame() {
+    raf = 0;
+    var p = Math.min(Math.max(scrollY / RUN, 0), 1);
+    var e = 1 - Math.pow(1 - p, 3);
+    var h0 = Math.round(H * 0.19);
+    root.style.setProperty('--lt-k', (1 - e).toFixed(3));
+    root.style.setProperty('--lt-h', (h0 + (MIN - h0) * e).toFixed(1) + 'px');
+    root.style.setProperty('--lt-s', (62 - 18 * e).toFixed(1) + 'px');
+    var h = h0 + (MIN - h0) * e;
+    shape(h, 46);
+  }
+  root.style.setProperty('--lt-min', MIN + 'px');
+  addEventListener('scroll', function () { if (!raf) raf = requestAnimationFrame(frame); }, { passive: true });
+  addEventListener('resize', function () { if (innerWidth !== lastW) { lastW = innerWidth; H = innerHeight; frame(); } });
+  frame();
 })();
 </script>
 <script>
