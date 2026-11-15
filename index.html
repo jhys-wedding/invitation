@@ -681,7 +681,10 @@ section.tint .cal .on span { position: relative; overflow: visible; background: 
 /* Cover names sized to the photo frame width (200px); more air at the top for in-app browsers */
 .cover.editorial .cover-title .t1 { font-size: 34.2px; }
 .ending-title { font-size: 34.2px; }
-.cover.editorial { padding-top: calc(8px + 28px); }
+/* Center the cover between the top band (34px) and the envelope pocket (19% of the screen) */
+html.lt-on .cover.editorial { padding-top: 34px; padding-bottom: calc(var(--cover-h, 100svh) * 0.19); }
+/* Short screens (in-app browsers): shrink the photo so the date never slips under the pocket */
+html.lt-on .cover.editorial .ph { width: max(120px, min(184px, calc(var(--cover-h, 100svh) * 0.81 - 319px))); }
 </style>
 </head>
 <body>
@@ -1256,7 +1259,7 @@ var CONFIG = {
     var cover = document.querySelector('.cover'), coverImg = cover && cover.querySelector('.ph > img'), lastW = innerWidth;
     function lockCover() { document.documentElement.style.setProperty('--cover-h', innerHeight + 'px'); }
     lockCover();
-    addEventListener('resize', function () { if (innerWidth !== lastW) { lastW = innerWidth; lockCover(); } });
+    addEventListener('resize', function () { if (innerWidth !== lastW || scrollY < 40) { lastW = innerWidth; lockCover(); } });   // also re-lock while still on the cover (in-app browsers show their toolbars after load)
     var zTick = false;
     function coverZoom() {
       zTick = false; if (!coverImg) return;
@@ -1334,7 +1337,7 @@ var CONFIG = {
   }
   root.style.setProperty('--lt-min', MIN + 'px');
   addEventListener('scroll', function () { if (!raf) raf = requestAnimationFrame(frame); }, { passive: true });
-  addEventListener('resize', function () { if (innerWidth !== lastW) { lastW = innerWidth; H = innerHeight; frame(); } });
+  addEventListener('resize', function () { if (innerWidth !== lastW || scrollY < 40) { lastW = innerWidth; H = innerHeight; frame(); } });
   frame();
 })();
 </script>
